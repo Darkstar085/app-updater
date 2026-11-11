@@ -1,5 +1,6 @@
 import unittest
 
+from build import grouped_platform_versions
 from release_config import platform_specs
 
 
@@ -29,6 +30,26 @@ class PlatformConfigTests(unittest.TestCase):
             platform_specs({"name": "Demo", "pattern": "*.apk", "additional_platforms": [
                 {"platform": "Linux", "patterns": []},
             ]})
+
+    def test_groups_platform_versions_on_one_line(self):
+        grouped = grouped_platform_versions({
+            "Demo": {
+                "Android": {"version": "1.2.0"},
+                "Windows": {"version": "2.0.0"},
+                "iOS": {"version": "3.0.0"},
+            }
+        })
+        self.assertEqual(
+            grouped["Demo"]["platforms"],
+            ["Windows v2.0.0", "Android v1.2.0", "iOS v3.0.0"],
+        )
+
+    def test_skips_missing_platform_versions(self):
+        grouped = grouped_platform_versions({
+            "Demo": {"Android": {"version": "1.2.0"}},
+            "Empty": {"Windows": {}},
+        })
+        self.assertEqual(grouped, {"Demo": {"platforms": ["Android v1.2.0"]}})
 
 
 if __name__ == "__main__":

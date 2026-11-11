@@ -24,6 +24,7 @@ CAPTIONS_FILE = ROOT / "captions.txt"
 UPDATES_FILE = ROOT / "updated-apps.txt"
 REPOSITORY = os.getenv("GITHUB_REPOSITORY", "Darkstar085/app-updater")
 VERSION_RE = re.compile(r"(?<!\d)v?(\d+(?:\.\d+){1,3})(?!\d)", re.I)
+PLATFORM_ORDER = ("Windows", "Android", "iOS", "macOS", "Linux")
 
 
 def run(command: list[str], *, check: bool = True) -> subprocess.CompletedProcess[str]:
@@ -237,13 +238,32 @@ def write_state(state: dict) -> None:
     )
 
 
-def generate_metadata(updates: list[dict], state: dict) -> None:
+def grouped_platform_versions(state: dict) -> dict[str, dict[str, str]]:
+    """Return app versions grouped by app, with a stable platform order."""
+    grouped = {}
+    for app, platforms in state.items():
+        entries = [
+            f"{platform} v{platforms[platform]['version']}"
+            for platform in PLATFORM_ORDER
+            if platform in platforms and platforms[platform].get("version")
+        ]
+        entries.extend(
+            f"{platform} v{details['version']}"
+            for platform, details in platforms.items()
+            if platform not in PLATFORM_ORDER and details.get("version")
+        )
+        if entries:
+            grouped[app] = {"platforms": entries}
+    return grouped
+
+
+def generate_metadata(updates: list[dict], state: dict, old: dict) -> None:
     lines = []
     captions = []
     for update in updates:
         track, version = update["track"], update["version"]
         name, platform = track["name"], track["platform"]
-        previous = old_track_state(state, track).get("version")
+        previous = old_track_state(old, track).get("version")
         lines.append(f"{name}|{platform}: {version}")
         transition = f"🚀 Version: {previous} → {version}" if previous else f"🆕 Version: {version}"
         for path in update["files"]:
@@ -291,10 +311,9 @@ def publish(updates: list[dict], old: dict, state: dict, existing_releases: dict
                     ])
 
         notes = ["Latest published versions:", ""]
-        for name in sorted(state):
-            entry = state[name].get(platform)
-            if entry:
-                notes.append(f"- {name}: {entry['version']}")
+        grouped = grouped_platform_versions(state)
+        for name in sorted(grouped, key=str.casefold):
+            notes.append(f"- {name} | " + " | ".join(grouped[name]["platforms"]))
         run(["gh", "release", "edit", tag, "--title", config["title"], "--notes", "\n".join(notes)])
         print(f"Updated {platform} release ({tag})")
 
@@ -323,7 +342,7 @@ def main() -> None:
         updates.append(update)
 
     write_state(state)
-    generate_metadata(updates, old)
+    generate_metadata(updates, state, old)
     publish(updates, old, state, existing_releases)
     print(f"Build completed: {len(updates)} app/platform update(s)")
 
