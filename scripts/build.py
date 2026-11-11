@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and publish updated application prebuilts."""
+"""Discover upstream app assets and publish cumulative platform releases."""
 
 from __future__ import annotations
 
@@ -14,13 +14,14 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
+from release_config import PLATFORM_RELEASES, platform_specs
+
 ROOT = Path(__file__).resolve().parents[1]
 DOWNLOAD_DIR = ROOT / "dl"
 APPS_FILE = ROOT / "apps.json"
-VERSIONS_FILE = ROOT / "latest-apk-versions.txt"
+VERSIONS_FILE = ROOT / "latest-versions.json"
 CAPTIONS_FILE = ROOT / "captions.txt"
 UPDATES_FILE = ROOT / "updated-apps.txt"
-RELEASE_TAG = "prebuilts"
 REPOSITORY = os.getenv("GITHUB_REPOSITORY", "Darkstar085/app-updater")
 VERSION_RE = re.compile(r"(?<!\d)v?(\d+(?:\.\d+){1,3})(?!\d)", re.I)
 
@@ -34,101 +35,108 @@ def gh_api(endpoint: str):
     return json.loads(result.stdout)
 
 
-def load_apps() -> list[tuple[str, str, str, str, str, str | None]]:
-    with APPS_FILE.open(encoding="utf-8") as handle:
-        data = json.load(handle)
-    return [
-        (
-            item["name"],
-            item["repo"],
-            item["pattern"],
-            item.get("description", ""),
-            item.get("emoji", ""),
-            item.get("rename"),
-        )
-        for item in data
-        if item.get("enabled", True)
-    ]
+def load_tracks() -> list[dict]:
+    apps = json.loads(APPS_FILE.read_text(encoding="utf-8"))
+    tracks = []
+    names = set()
+    for app in apps:
+        if not app.get("enabled", True):
+            continue
+        name, repo = app.get("name"), app.get("repo")
+        if not isinstance(name, str) or not name.strip() or not isinstance(repo, str) or "/" not in repo:
+            raise ValueError(f"Invalid app entry: {app!r}")
+        if name in names:
+            raise ValueError(f"Duplicate app name: {name}")
+        names.add(name)
+        for spec in platform_specs(app):
+            tracks.append({
+                "name": name,
+                "repo": repo,
+                "platform": spec["platform"],
+                "patterns": spec["patterns"],
+                "description": app.get("description", ""),
+                "emoji": app.get("emoji", "📦"),
+                "rename": app.get("rename"),
+            })
+    return tracks
 
 
-APPS = load_apps()
-APP_INFO = {app: (repo, description, emoji) for app, repo, _pattern, description, emoji, _rename in APPS}
+TRACKS = load_tracks()
 
 
-def latest_release(repo: str, pattern: str) -> dict:
-    """Find the newest non-draft release containing an asset matching pattern."""
+def release_tag(platform: str) -> str:
+    return PLATFORM_RELEASES[platform]["tag"]
+
+
+def latest_release(repo: str, patterns: list[str]) -> dict:
+    """Find the newest stable release containing one of the requested assets."""
     releases = gh_api(f"repos/{repo}/releases?per_page=30")
     for release in releases:
         if release.get("draft") or release.get("prerelease"):
             continue
-        if any(fnmatch.fnmatch(asset.get("name", ""), pattern) for asset in release.get("assets", [])):
+        if any(
+            fnmatch.fnmatch(asset.get("name", ""), pattern)
+            for asset in release.get("assets", [])
+            for pattern in patterns
+        ):
             return release
-    raise RuntimeError(f"no release asset matching {pattern!r} found in {repo}")
+    raise RuntimeError(f"no release assets matching {patterns!r} found in {repo}")
 
 
-def asset_version(release: dict, pattern: str) -> str | None:
-    """Return a version discoverable from release metadata without downloading an asset."""
-    matching = sorted(
-        asset.get("name", "")
-        for asset in release.get("assets", [])
-        if fnmatch.fnmatch(asset.get("name", ""), pattern)
-    )
-    versions = {match.group(1) for name in matching if (match := VERSION_RE.search(name))}
+def asset_version(release: dict, assets: list[dict]) -> str | None:
+    versions = {
+        match.group(1)
+        for asset in assets
+        if (match := VERSION_RE.search(asset.get("name", "")))
+    }
     if len(versions) == 1:
         return versions.pop()
-
     tag = release.get("tag_name", "")
-    match = VERSION_RE.fullmatch(tag.lstrip("v"))
-    if match:
-        return match.group(1)
-    return None
+    match = VERSION_RE.search(tag)
+    return match.group(1) if match else None
 
 
-def download_asset(app: str, repo: str, pattern: str, old: dict[str, str]) -> None:
-    destination = DOWNLOAD_DIR / app
+def matching_asset_metadata(release: dict, patterns: list[str]) -> list[dict]:
+    return [
+        asset for asset in release.get("assets", [])
+        if any(fnmatch.fnmatch(asset.get("name", ""), pattern) for pattern in patterns)
+    ]
+
+
+def download_track(track: dict) -> tuple[dict, Path] | None:
+    name, repo, patterns = track["name"], track["repo"], track["patterns"]
+    destination = DOWNLOAD_DIR / track["platform"].lower() / name
     shutil.rmtree(destination, ignore_errors=True)
-
     try:
-        release = latest_release(repo, pattern)
-        external_version = asset_version(release, pattern)
-        if external_version and old.get(app) == external_version:
-            print(f"{app} unchanged (v{external_version}) - skipping download")
-            return
-
+        release = latest_release(repo, patterns)
+        matched = matching_asset_metadata(release, patterns)
+        if not matched:
+            return None
         destination.mkdir(parents=True, exist_ok=True)
-        tag = release["tag_name"]
-        result = run(
-            [
-                "gh",
-                "release",
-                "download",
-                tag,
-                "--repo",
-                repo,
-                "--pattern",
-                pattern,
-                "--dir",
-                str(destination),
-                "--clobber",
-            ],
-            check=False,
-        )
+        downloaded = set()
+        for pattern in patterns:
+            if not any(fnmatch.fnmatch(asset["name"], pattern) for asset in matched):
+                continue
+            run([
+                "gh", "release", "download", release["tag_name"],
+                "--repo", repo, "--pattern", pattern,
+                "--dir", str(destination), "--clobber",
+            ])
+            downloaded.update(
+                asset["name"] for asset in matched
+                if fnmatch.fnmatch(asset["name"], pattern)
+            )
+        files = [destination / filename for filename in sorted(downloaded)]
+        files = [path for path in files if path.is_file()]
+        if not files:
+            print(f"⚠️ {name} ({track['platform']}): no matching assets downloaded")
+            shutil.rmtree(destination, ignore_errors=True)
+            return None
+        return ({"release": release, "assets": matched, "files": files}, destination)
     except Exception as exc:
-        print(f"⚠️ {app}: could not fetch matching release: {exc}")
+        print(f"⚠️ {name} ({track['platform']}): could not fetch release: {exc}")
         shutil.rmtree(destination, ignore_errors=True)
-        return
-
-    if result.returncode != 0:
-        print(f"⚠️ {app}: no matching release asset for selected release")
-        shutil.rmtree(destination, ignore_errors=True)
-        return
-
-    if app in {"AmarokHider", "DeltaIcons"}:
-        for path in destination.glob("*foss*.apk"):
-            path.unlink(missing_ok=True)
-    if app == "ReFra":
-        for path in destination.glob("*nomaps*.apk"):
-            path.unlink(missing_ok=True)
+        return None
 
 
 def apk_metadata(path: Path) -> tuple[str | None, str | None]:
@@ -140,225 +148,184 @@ def apk_metadata(path: Path) -> tuple[str | None, str | None]:
     return (package.group(1) if package else None, version.group(1) if version else None)
 
 
-def matching_files(app: str, pattern: str) -> list[Path]:
-    return sorted(Path(p) for p in glob.glob(str(DOWNLOAD_DIR / app / pattern)) if Path(p).is_file())
-
-
-def asset_priority(path: Path) -> tuple[int, int, int, int, str]:
+def asset_priority(path: Path) -> tuple[int, int, int, str]:
     name = path.name.lower()
     return (
         0 if "universal" in name else 1 if "arm64-v8a" in name else 2,
         0 if "release" in name else 1 if "stable" in name else 2,
         0 if "foss" not in name else 1,
-        0 if "debug" not in name else 1,
         name,
     )
 
 
-def choose_asset(app: str, pattern: str) -> tuple[Path, str] | None:
-    candidates = matching_files(app, pattern)
-    apk_candidates = [path for path in candidates if path.suffix.lower() == ".apk"]
-    if not apk_candidates:
-        print(f"⚠️ {app}: no APK files matched; skipping app")
-        return None
-
+def choose_apk(files: list[Path], app: str) -> tuple[Path, str] | None:
+    candidates = [path for path in files if path.suffix.lower() == ".apk"]
     inspected = []
-    for candidate in apk_candidates:
-        package, version = apk_metadata(candidate)
-        if package and version:
-            inspected.append((candidate, package, version))
-
+    for candidate in candidates:
+        _package, version = apk_metadata(candidate)
+        if version:
+            inspected.append((candidate, version))
     if not inspected:
-        print(f"⚠️ {app}: could not read Android package metadata; skipping app")
+        print(f"⚠️ {app}: could not read Android APK version; skipping")
+        return None
+    versions = {version for _path, version in inspected}
+    if len(versions) > 1:
+        universal = [item for item in inspected if "universal" in item[0].name.lower()]
+        arm64 = [item for item in inspected if "arm64-v8a" in item[0].name.lower()]
+        preferred = universal or arm64 or inspected
+        preferred_versions = {version for _path, version in preferred}
+        if len(preferred_versions) > 1:
+            details = ", ".join(f"{path.name}: {version}" for path, version in preferred)
+            print(f"⚠️ {app}: multiple APK versions remain; skipping: {details}")
+            return None
+        inspected = preferred
+    return sorted(inspected, key=lambda item: asset_priority(item[0]))[0]
+
+
+def old_track_state(old: dict, track: dict) -> dict:
+    return old.get(track["name"], {}).get(track["platform"], {})
+
+
+def process_track(track: dict, old: dict, force: bool) -> dict | None:
+    downloaded = download_track(track)
+    if not downloaded:
+        return None
+    info, _directory = downloaded
+    release, source_files = info["release"], info["files"]
+    version = asset_version(release, info["assets"])
+    if track["platform"] == "Android":
+        chosen = choose_apk(source_files, track["name"])
+        if not chosen:
+            return None
+        source, apk_version = chosen
+        version = apk_version or version
+        selected = [source]
+    else:
+        selected = source_files
+
+    if not version:
+        print(f"⚠️ {track['name']} ({track['platform']}): no version found; skipping")
         return None
 
-    identities = {(package, version) for _path, package, version in inspected}
-    if len(identities) > 1:
-        packages = {package for _path, package, _version in inspected}
-        non_foss = [item for item in inspected if "foss" not in item[0].name.lower()]
-        foss = [item for item in inspected if "foss" in item[0].name.lower()]
-
-        # Some releases publish the same app twice with a normal and a FOSS
-        # build. When the package is the same, prefer the normal build rather
-        # than treating the FOSS suffix as a version conflict.
-        if len(packages) == 1 and non_foss and foss:
-            inspected = non_foss
+    previous = old_track_state(old, track)
+    final_paths = []
+    for source in selected:
+        if track["platform"] == "Android":
+            filename = f"{track['name']}_v{version}.apk"
         else:
-            universal = [item for item in inspected if "universal" in item[0].name.lower()]
-            arm64 = [item for item in inspected if "arm64-v8a" in item[0].name.lower()]
-            preferred = universal or arm64 or inspected
-            preferred_identities = {(package, version) for _path, package, version in preferred}
-            if len(preferred_identities) > 1:
-                details = ", ".join(
-                    f"{path.name}: {package or 'unknown package'} {version or 'unknown version'}"
-                    for path, package, version in preferred
-                )
-                print(f"⚠️ {app}: multiple APK versions/packages remain; skipping app: {details}")
-                return None
-            inspected = preferred
+            filename = f"{track['name']}_v{version}_{source.name}"
+        final = ROOT / filename
+        if source.resolve() != final.resolve():
+            shutil.copy2(source, final)
+        final_paths.append(final)
 
-    path, package, version = sorted(inspected, key=lambda item: asset_priority(item[0]))[0]
-    return path, version
+    asset_names = [path.name for path in final_paths]
+    if not force and previous.get("version") == version and previous.get("assets") == asset_names:
+        for path in final_paths:
+            path.unlink(missing_ok=True)
+        print(f"{track['name']} ({track['platform']}) unchanged (v{version})")
+        return None
 
-
-def process_assets(old: dict[str, str]) -> list[tuple[str, str, Path]]:
-    updates: list[tuple[str, str, Path]] = []
-    for app, _repo, pattern, _desc, _emoji, rename in APPS:
-        candidates = matching_files(app, pattern)
-        if not candidates:
-            continue
-
-        if all(path.suffix.lower() == ".exe" for path in candidates):
-            source = sorted(candidates)[0]
-            match = re.search(r"[-_]v?([0-9]+(?:\.[0-9]+){1,3}).*\.exe$", source.name, re.I)
-            version = match.group(1) if match else "unknown"
-        else:
-            selected = choose_asset(app, pattern)
-            if not selected:
-                shutil.rmtree(DOWNLOAD_DIR / app, ignore_errors=True)
-                continue
-            source, version = selected
-
-        if version == "unknown":
-            print(f"⚠️ {app}: could not determine version from {source.name}; skipping app")
-            shutil.rmtree(DOWNLOAD_DIR / app, ignore_errors=True)
-            continue
-        if old.get(app) == version:
-            print(f"{app} unchanged (v{version}) - skipping")
-            shutil.rmtree(DOWNLOAD_DIR / app, ignore_errors=True)
-            continue
-
-        final = ROOT / (f"{app}_v{version}{source.suffix.lower()}")
-        if rename:
-            temporary = ROOT / rename
-            shutil.move(str(source), temporary)
-            shutil.move(str(temporary), final)
-        else:
-            final.unlink(missing_ok=True)
-            shutil.move(str(source), final)
-        updates.append((app, version, final))
-        print(f"Will update {app} → v{version} (was: {old.get(app, 'none')})")
-    return updates
+    print(f"Will update {track['name']} ({track['platform']}) → v{version}")
+    return {"track": track, "version": version, "files": final_paths, "assets": asset_names}
 
 
-def read_versions() -> dict[str, str]:
-    if not VERSIONS_FILE.exists():
-        return {}
-    versions: dict[str, str] = {}
-    for line in VERSIONS_FILE.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line:
-            continue
-        if ":" in line:
-            app, version = line.split(":", 1)
-        elif "=" in line:
-            app, version = line.split("=", 1)
-        else:
-            continue
-        app, version = app.strip(), version.strip()
-        if app and version:
-            versions[app] = version
-    return versions
-
-
-def generate_metadata(updates: list[tuple[str, str, Path]], old: dict[str, str]) -> None:
-    version_lines = {app: old[app] for app, _repo, _pattern, _desc, _emoji, _rename in APPS if app in old}
-    captions: list[str] = []
-
-    for app, version, path in updates:
-        previous = old.get(app)
-        version_lines[app] = version
-        repo, description, emoji = APP_INFO[app]
-        version_line = f"🚀 Version: {previous} → {version}" if previous else f"🆕 Version: {version}"
-        filename = html.escape(path.name)
-        description = html.escape(description)
-        changelog = f"Changelog: <a href='https://github.com/{repo}/releases/latest'>Open</a>"
-        captions.append(
-            f"📦 <b>File name</b> – {filename}\n"
-            f"    {emoji} {description}\n"
-            f"{version_line}\n\n"
-            f"{changelog}\n"
-            f"    ----"
-        )
-
-    with VERSIONS_FILE.open("w", encoding="utf-8") as handle:
-        for app, _repo, _pattern, _desc, _emoji, _rename in APPS:
-            if app in version_lines:
-                handle.write(f"{app}: {version_lines[app]}\n")
-
-    with CAPTIONS_FILE.open("w", encoding="utf-8") as handle:
-        if captions:
-            handle.write("\n".join(captions))
-            handle.write("\n")
-
-
-def publish(updates: list[tuple[str, str, Path]], versions: dict[str, str]) -> None:
-    UPDATES_FILE.write_text(
-        "".join(f"{app}: {version}\n" for app, version, _path in updates),
+def write_state(state: dict) -> None:
+    VERSIONS_FILE.write_text(
+        json.dumps(state, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
-    if not updates:
-        print("No app updates to publish")
-        return
 
-    release_check = run(["gh", "release", "view", RELEASE_TAG], check=False)
-    if release_check.returncode != 0:
-        run([
-            "gh", "release", "create", RELEASE_TAG,
-            "--title", "Android App Updates",
-            "--notes", "Latest published versions of all tracked apps.",
-        ])
 
-    run([
-        "gh", "release", "upload", RELEASE_TAG,
-        *[str(path) for _app, _version, path in updates],
-        "--clobber",
-    ])
+def generate_metadata(updates: list[dict], state: dict) -> None:
+    lines = []
+    captions = []
+    for update in updates:
+        track, version = update["track"], update["version"]
+        name, platform = track["name"], track["platform"]
+        previous = old_track_state(state, track).get("version")
+        lines.append(f"{name}|{platform}: {version}")
+        transition = f"🚀 Version: {previous} → {version}" if previous else f"🆕 Version: {version}"
+        for path in update["files"]:
+            filename = html.escape(path.name)
+            caption = (
+                f"📦 <b>File name</b> – {filename}\n"
+                f"    {track['emoji']} {html.escape(track['description'])} ({platform})\n"
+                f"{transition}\n\n"
+                f"Changelog: <a href='https://github.com/{track['repo']}/releases/latest'>Open</a>\n"
+                f"    ----"
+            )
+            captions.append(caption)
+    UPDATES_FILE.write_text("".join(f"{line}\n" for line in lines), encoding="utf-8")
+    CAPTIONS_FILE.write_text("\n".join(captions) + ("\n" if captions else ""), encoding="utf-8")
 
-    release = gh_api(f"repos/{REPOSITORY}/releases/tags/{RELEASE_TAG}")
-    for app, _version, current_path in updates:
-        prefix = f"{app}_v"
-        for asset in release.get("assets", []):
-            name = asset.get("name", "")
-            if (
-                name != current_path.name
-                and name.startswith(prefix)
-                and Path(name).suffix.lower() in {".apk", ".exe"}
-            ):
-                run([
-                    "gh", "api", "--method", "DELETE",
-                    f"repos/{REPOSITORY}/releases/assets/{asset['id']}",
-                ])
 
-    notes = "Latest published versions:\n\n" + "\n".join(
-        f"- {app}: {versions[app]}"
-        for app, _repo, _pattern, _description, _emoji, _rename in APPS
-        if app in versions
-    )
-    run([
-        "gh", "release", "edit", RELEASE_TAG,
-        "--title", "Android App Updates",
-        "--notes", notes,
-    ])
-    print(f"Updated cumulative release {RELEASE_TAG}")
+def publish(updates: list[dict], old: dict, state: dict, existing_releases: dict[str, bool]) -> None:
+    by_platform = {}
+    for update in updates:
+        by_platform.setdefault(update["track"]["platform"], []).append(update)
+
+    for platform, platform_updates in by_platform.items():
+        tag = release_tag(platform)
+        config = PLATFORM_RELEASES[platform]
+        if not existing_releases.get(platform, False):
+            run([
+                "gh", "release", "create", tag,
+                "--title", config["title"],
+                "--notes", f"Latest published versions for {platform}.",
+            ])
+
+        paths = [str(path) for update in platform_updates for path in update["files"]]
+        run(["gh", "release", "upload", tag, *paths, "--clobber"])
+
+        release = gh_api(f"repos/{REPOSITORY}/releases/tags/{tag}")
+        for update in platform_updates:
+            track = update["track"]
+            previous_names = old_track_state(old, track).get("assets", [])
+            current_names = set(update["assets"])
+            for asset in release.get("assets", []):
+                if asset.get("name") in previous_names and asset.get("name") not in current_names:
+                    run([
+                        "gh", "api", "--method", "DELETE",
+                        f"repos/{REPOSITORY}/releases/assets/{asset['id']}",
+                    ])
+
+        notes = ["Latest published versions:", ""]
+        for name in sorted(state):
+            entry = state[name].get(platform)
+            if entry:
+                notes.append(f"- {name}: {entry['version']}")
+        run(["gh", "release", "edit", tag, "--title", config["title"], "--notes", "\n".join(notes)])
+        print(f"Updated {platform} release ({tag})")
 
 
 def main() -> None:
     print(f"Build started: {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC}")
     DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
-    release_check = run(["gh", "release", "view", RELEASE_TAG], check=False)
-    old = read_versions() if release_check.returncode == 0 else {}
-    if release_check.returncode != 0:
-        print("No cumulative release exists; bootstrapping all tracked apps.")
-    for app, repo, pattern, _desc, _emoji, _rename in APPS:
-        print(f"::group::Check {app}")
-        download_asset(app, repo, pattern, old)
-        print("::endgroup::")
+    old = json.loads(VERSIONS_FILE.read_text(encoding="utf-8")) if VERSIONS_FILE.exists() else {}
 
-    updates = process_assets(old)
+    existing_releases = {}
+    for platform, config in PLATFORM_RELEASES.items():
+        check = run(["gh", "release", "view", config["tag"]], check=False)
+        existing_releases[platform] = check.returncode == 0
+
+    updates = []
+    state = json.loads(json.dumps(old))
+    for track in TRACKS:
+        platform_exists = existing_releases[track["platform"]]
+        update = process_track(track, old, force=not platform_exists)
+        if not update:
+            continue
+        state.setdefault(track["name"], {})[track["platform"]] = {
+            "version": update["version"],
+            "assets": update["assets"],
+        }
+        updates.append(update)
+
+    write_state(state)
     generate_metadata(updates, old)
-    publish(updates, read_versions())
-    print("Build completed")
+    publish(updates, old, state, existing_releases)
+    print(f"Build completed: {len(updates)} app/platform update(s)")
 
 
 if __name__ == "__main__":

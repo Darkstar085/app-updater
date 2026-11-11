@@ -29,24 +29,27 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y aapt gh
 
-      - name: Build and update cumulative release
+      - name: Run unit tests
+        run: python3 -m unittest discover -s scripts -p 'test_*.py'
+
+      - name: Build and update platform releases
         run: python3 scripts/build.py
 
       - name: Commit generated metadata
         run: |
-          if [ ! -f latest-apk-versions.txt ] || [ ! -f captions.txt ]; then
+          if [ ! -f latest-versions.json ] || [ ! -f captions.txt ]; then
             echo "Generated metadata files are missing"
             exit 1
           fi
 
-          if git diff --quiet -- latest-apk-versions.txt captions.txt && [ -z "$(git ls-files --others --exclude-standard -- latest-apk-versions.txt captions.txt)" ]; then
+          if git diff --quiet -- latest-versions.json captions.txt && [ -z "$(git ls-files --others --exclude-standard -- latest-versions.json captions.txt)" ]; then
             echo "No metadata changes to commit"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add latest-apk-versions.txt captions.txt
+          git add latest-versions.json captions.txt
 
           if git diff --cached --quiet; then
             echo "No metadata changes to commit"
@@ -58,13 +61,13 @@ jobs:
           update_count="$(grep -c . updated-apps.txt || true)"
 
           {
-            printf 'chore(releases): update prebuilts\n\n'
+            printf 'chore(releases): update platform assets\n\n'
             printf '📅 Date: %s\n' "$date_ist"
             printf '🕐 Time: %s\n\n' "$time_ist"
             printf '✅ Updated apps (%s):\n' "$update_count"
             sed 's/^/- /' updated-apps.txt
             printf '\n📁 Updated files:\n'
-            printf '%s\n' '- latest-apk-versions.txt' '- captions.txt'
+            printf '%s\n' '- latest-versions.json' '- captions.txt'
             printf '\n🤖 Automated by GitHub Actions\n'
           } > commit-message.txt
 
@@ -157,10 +160,11 @@ jobs:
               if not line.strip():
                   continue
               name, separator, version = line.partition(":")
-              if not separator or not name.strip() or not version.strip():
+              app, platform_separator, platform = name.partition("|")
+              if not separator or not platform_separator or not app.strip() or not platform.strip() or not version.strip():
                   raise ValueError(f"Invalid update entry: {line!r}")
-              name, version = name.strip(), version.strip()
-              updates.append(f"{emojis.get(name, '📦')} {name} - v{version}")
+              app, platform, version = app.strip(), platform.strip(), version.strip()
+              updates.append(f"{emojis.get(app, '📦')} {app} ({platform}) - v{version}")
 
           if not updates:
               raise SystemExit("Update summary is empty")

@@ -20,11 +20,35 @@
   {
     "name": "ABDownloadManager",
     "repo": "amir1376/ab-download-manager",
-    "pattern": "*windows_x64*.exe",
+    "pattern": "*windows_*.exe",
     "description": "Powerful download manager with multi-threading",
     "emoji": "📥",
     "rename": null,
-    "enabled": true
+    "enabled": true,
+    "patterns": [
+      "*windows_*.exe",
+      "*windows_*.zip"
+    ],
+    "additional_platforms": [
+      {
+        "platform": "Android",
+        "patterns": [
+          "*android_universal.apk"
+        ]
+      },
+      {
+        "platform": "Linux",
+        "patterns": [
+          "*linux_*.tar.gz"
+        ]
+      },
+      {
+        "platform": "macOS",
+        "patterns": [
+          "*mac_*.dmg"
+        ]
+      }
+    ]
   },
   {
     "name": "Acode",
@@ -60,7 +84,26 @@
     "description": "Open-source system cleaner and security scanner for Windows, macOS and Linux",
     "emoji": "🧹",
     "rename": null,
-    "enabled": true
+    "enabled": true,
+    "patterns": [
+      "Kudu-Setup-*.exe",
+      "Kudu-Portable-*.exe"
+    ],
+    "additional_platforms": [
+      {
+        "platform": "Linux",
+        "patterns": [
+          "Kudu-*.AppImage",
+          "Kudu-*.deb"
+        ]
+      },
+      {
+        "platform": "macOS",
+        "patterns": [
+          "Kudu-*-*.dmg"
+        ]
+      }
+    ]
   },
   {
     "name": "Mornye",
@@ -69,7 +112,15 @@
     "description": "Music streaming and discovery app for Android",
     "emoji": "🎵",
     "rename": null,
-    "enabled": true
+    "enabled": true,
+    "additional_platforms": [
+      {
+        "platform": "iOS",
+        "patterns": [
+          "*ios-unsigned.ipa"
+        ]
+      }
+    ]
   },
   {
     "name": "LibreCuts",
@@ -141,7 +192,23 @@
     "description": "Simple unit and currency converter",
     "emoji": "🔄",
     "rename": null,
-    "enabled": true
+    "enabled": true,
+    "additional_platforms": [
+      {
+        "platform": "Windows",
+        "patterns": [
+          "converternow-windows-setup.exe",
+          "converternow-windows.msix"
+        ]
+      },
+      {
+        "platform": "Linux",
+        "patterns": [
+          "converternow-*.AppImage",
+          "converternow-linux-*.tar.gz"
+        ]
+      }
+    ]
   },
   {
     "name": "Cromite",
@@ -150,7 +217,21 @@
     "description": "Bromite-based privacy browser",
     "emoji": "🌐",
     "rename": null,
-    "enabled": true
+    "enabled": true,
+    "additional_platforms": [
+      {
+        "platform": "Windows",
+        "patterns": [
+          "chrome-win.zip"
+        ]
+      },
+      {
+        "platform": "Linux",
+        "patterns": [
+          "chrome-lin64.tar.gz"
+        ]
+      }
+    ]
   },
   {
     "name": "CpuInfo",
@@ -294,7 +375,30 @@
     "description": "Secure, local file sharing app",
     "emoji": "📤",
     "rename": null,
-    "enabled": true
+    "enabled": true,
+    "additional_platforms": [
+      {
+        "platform": "Windows",
+        "patterns": [
+          "*windows-x86-64.exe",
+          "*windows-arm-64.zip"
+        ]
+      },
+      {
+        "platform": "Linux",
+        "patterns": [
+          "*linux-*.deb",
+          "*linux-x86-64.AppImage",
+          "*linux-*.tar.gz"
+        ]
+      },
+      {
+        "platform": "macOS",
+        "patterns": [
+          "*.dmg"
+        ]
+      }
+    ]
   },
   {
     "name": "LTECleanerFOSS",
@@ -402,7 +506,26 @@
     "description": "A modern, open-source download manager for Windows",
     "emoji": "📥",
     "rename": null,
-    "enabled": true
+    "enabled": true,
+    "patterns": [
+      "*.exe",
+      "*.msi"
+    ],
+    "additional_platforms": [
+      {
+        "platform": "Linux",
+        "patterns": [
+          "*amd64.AppImage",
+          "*amd64.deb"
+        ]
+      },
+      {
+        "platform": "macOS",
+        "patterns": [
+          "*_aarch64.dmg"
+        ]
+      }
+    ]
   },
   {
     "name": "Shizuku",
@@ -492,7 +615,27 @@
     "description": "Lightweight YT music player with Material You support",
     "emoji": "🎵",
     "rename": null,
-    "enabled": true
+    "enabled": true,
+    "additional_platforms": [
+      {
+        "platform": "Windows",
+        "patterns": [
+          "SimpMusic-Windows-installer.zip"
+        ]
+      },
+      {
+        "platform": "Linux",
+        "patterns": [
+          "SimpMusic-x86_64.AppImage"
+        ]
+      },
+      {
+        "platform": "macOS",
+        "patterns": [
+          "SimpMusic-*-mac-*.dmg"
+        ]
+      }
+    ]
   },
   {
     "name": "Symphony",
