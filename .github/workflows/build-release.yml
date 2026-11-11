@@ -2,13 +2,6 @@ name: Build and Release
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths-ignore:
-      - "*.md"
-      - "*.txt"
-      - ".github/workflows/**"
-      - ".github/scripts/**"
   schedule:
     - cron: "0 10 * * 0"
       timezone: "Asia/Kolkata"
@@ -22,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    outputs:
+      has_updates: ${{ steps.summary.outputs.has_updates }}
     env:
       GH_TOKEN: ${{ github.token }}
 
@@ -34,7 +29,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y aapt gh
 
-      - name: Build and publish prebuilts
+      - name: Build and update cumulative release
         run: python3 scripts/build.py
 
       - name: Commit generated metadata
@@ -53,27 +48,133 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add latest-apk-versions.txt captions.txt
 
-          updated_apps="$(git diff --cached --unified=0 -- latest-apk-versions.txt | grep -E '^\+[^+].*: ' | sed 's/^+//' || true)"
-          if [ -z "$updated_apps" ]; then
-            echo "No app updates; skipping metadata commit"
+          if git diff --cached --quiet; then
+            echo "No metadata changes to commit"
             exit 0
           fi
 
-          updated_count="$(printf '%s\n' "$updated_apps" | sed '/^$/d' | wc -l | tr -d ' ')"
-
           date_ist="$(TZ=Asia/Kolkata date '+%Y-%m-%d')"
-          time_ist="$(TZ=Asia/Kolkata date '+%H:%M')"
+          time_ist="$(TZ=Asia/Kolkata date '+%H:%M IST')"
+          update_count="$(grep -c . updated-apps.txt || true)"
 
-          description="📦 Prebuilts Update"$'\n\n'"📅 Date: ${date_ist}"$'\n'"🕐 Time: ${time_ist} IST"$'\n\n'"✅ Updated apps (${updated_count}):"$'\n'
-          while IFS= read -r line; do
-            [ -z "$line" ] && continue
-            app="${line%%:*}"
-            version="${line#*: }"
-            description+="- ${app}: ${version}"$'\n'
-          done <<< "$updated_apps"
+          {
+            printf 'chore(releases): update prebuilts\n\n'
+            printf '📅 Date: %s\n' "$date_ist"
+            printf '🕐 Time: %s\n\n' "$time_ist"
+            printf '✅ Updated apps (%s):\n' "$update_count"
+            sed 's/^/- /' updated-apps.txt
+            printf '\n📁 Updated files:\n'
+            printf '%s\n' '- latest-apk-versions.txt' '- captions.txt'
+            printf '\n🤖 Automated by GitHub Actions\n'
+          } > commit-message.txt
 
-          description+=$'\n'"📁 Updated files:"$'\n'"- latest-apk-versions.txt"$'\n'"- captions.txt"$'\n\n'"🤖 Automated by GitHub Actions"
-
-          git commit -m "Prebuilt Update - ${date_ist}" \
-            -m "${description}"
+          git -c user.name="github-actions[bot]" \
+            -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -F commit-message.txt
           git push origin HEAD:main
+
+      - name: Check update summary
+        id: summary
+        run: |
+          if [ -s updated-apps.txt ]; then
+            echo "has_updates=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_updates=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload update summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-update-summary
+          path: updated-apps.txt
+          if-no-files-found: error
+          retention-days: 1
+
+  deploy-pages:
+    needs: build-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout latest metadata
+        uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - name: Generate app catalog
+        run: python3 scripts/catalog.py
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload dashboard
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+      - name: Deploy dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  notify-telegram:
+    needs: [build-release, deploy-pages]
+    if: needs.build-release.outputs.has_updates == 'true'
+    runs-on: ubuntu-latest
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    steps:
+      - name: Checkout app configuration
+        uses: actions/checkout@v5
+
+      - name: Download update summary
+        uses: actions/download-artifact@v4
+        with:
+          name: app-update-summary
+
+      - name: Notify Telegram
+        run: |
+          test -n "$TELEGRAM_BOT_TOKEN" || { echo "TELEGRAM_BOT_TOKEN is missing"; exit 1; }
+          test -n "$TELEGRAM_CHAT_ID" || { echo "TELEGRAM_CHAT_ID is missing"; exit 1; }
+
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          apps = json.loads(Path("apps.json").read_text(encoding="utf-8"))
+          emojis = {
+              app["name"]: app.get("emoji") or "📦"
+              for app in apps
+              if app.get("enabled", True)
+          }
+          updates = []
+          for line in Path("updated-apps.txt").read_text(encoding="utf-8").splitlines():
+              if not line.strip():
+                  continue
+              name, separator, version = line.partition(":")
+              if not separator or not name.strip() or not version.strip():
+                  raise ValueError(f"Invalid update entry: {line!r}")
+              name, version = name.strip(), version.strip()
+              updates.append(f"{emojis.get(name, '📦')} {name} - v{version}")
+
+          if not updates:
+              raise SystemExit("Update summary is empty")
+
+          message = (
+              "🆕 New Update Available!\n\n"
+              + "\n".join(updates)
+              + "\n\n⬇️ Download:\n"
+              + "https://darkstar085.github.io/app-updater/\n"
+          )
+          Path("telegram-message.txt").write_text(message, encoding="utf-8")
+          PY
+
+          curl --fail --silent --show-error --retry 3 \
+            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text@telegram-message.txt"

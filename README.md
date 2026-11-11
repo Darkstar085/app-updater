@@ -16,14 +16,13 @@ Android App Updater monitors selected GitHub repositories, detects new releases,
 - **Version tracking**
   - Compares upstream versions with previously published versions
   - Republishes only applications that have changed
-- **Centralized releases**
-  - Creates a single GitHub Release for each update cycle
-  - Includes only changed applications
+- **Centralized release**
+  - Maintains one cumulative GitHub Release containing the latest APK/EXE for every successfully tracked app
+  - Replaces only an app's previous asset when that app is updated; unchanged app assets remain
   - Uses a consistent naming format: `AppName_vVERSION.apk` or `AppName_vVERSION.exe`
-- **Telegram distribution**
-  - Publishes updated applications automatically
-  - Avoids duplicate uploads
-  - Handles Telegram FloodWait and upload retries
+- **Telegram notifications**
+  - Sends an update list only when apps change
+  - Includes the GitHub Pages download catalog link; APK/EXE files are not uploaded to Telegram
 
 ## 🔄 Update Pipeline
 
@@ -49,13 +48,11 @@ Android App Updater monitors selected GitHub repositories, detects new releases,
                 Skip           ▼
                        Prepare Release
                               │
-                       ┌──────┴──────┐
-                       ▼             ▼
-                GitHub Release   Telegram
-                       │             │
-                       └──────┬──────┘
                               ▼
-                     Update Version State
+                         Deploy Pages
+                              │
+                              ▼
+                       Telegram Notice
 ```
 
 ## 📱 Supported Applications
@@ -83,29 +80,31 @@ The updater currently manages a collection of applications, including:
 
 The complete application configuration is maintained in [`apps.json`](apps.json).
 
+## 🌐 Web Dashboard
+
+A searchable GitHub Pages catalog lists configured applications, their tracked versions, categories, platforms, and centralized download links. It is deployed automatically after every successful weekly or manual build.
+
+Enable GitHub Pages with **GitHub Actions** as the build and deployment source in repository Settings → Pages. The dashboard URL is `https://darkstar085.github.io/android-app-updater/`.
+
 ## 📦 Releases
 
-Each update creates a GitHub Release containing only applications whose detected version has changed since the previous successful update.
-
-Release metadata includes updated application names, versions, descriptions, and upstream changelog links.
+The repository maintains one release with the fixed tag `prebuilts`. Every run adds or replaces APK/EXE assets for changed apps while preserving the latest assets for unchanged apps. The release notes list the latest published version of every tracked app.
 
 ## ⏰ Automation
 
-- **Build & Release:** Every Sunday at **10:00 AM Asia/Kolkata**
-- Both workflows support manual execution.
+- **Build & Release:** Every Sunday at **10:00 AM Asia/Kolkata**, or manually. It updates the cumulative release, deploys Pages, then notifies Telegram.
+- **Cleanup:** Monthly on the 1st at **10:00 AM Asia/Kolkata**, or manually. It removes older Actions runs, caches, and inactive Pages deployments. The latest Pages deployment is preserved; releases and their assets are untouched.
 
 ## 📲 Telegram
 
-Successful releases are automatically published to the configured Telegram channel.
-
-Telegram uploads use a bounded recent-message scan to avoid duplicate filename/size combinations. Captions do not repeat the filename because Telegram already displays the uploaded document name.
+When one or more apps change, the workflow sends a text-only update list to the configured Telegram channel after the Pages deployment succeeds. The message links to the Pages catalog for downloads. No app files are uploaded to Telegram.
 
 ## ⚙️ Reliability
 
 - Handles special asset naming and explicit rename cases
 - Continues when an upstream repository has no matching asset
 - Tracks versions to avoid republishing unchanged applications
-- Retries Telegram uploads and handles FloodWait errors
+- Retries transient Telegram notification request failures
 - Uses concurrency controls to prevent overlapping build or delivery runs
 
 ## 🔐 Required Secrets
@@ -113,9 +112,7 @@ Telegram uploads use a bounded recent-message scan to avoid duplicate filename/s
 The following GitHub Actions secrets are required:
 
 ```text
-TELEGRAM_API_ID
-TELEGRAM_API_HASH
-TELEGRAM_SESSION
+TELEGRAM_BOT_TOKEN
 TELEGRAM_CHAT_ID
 ```
 

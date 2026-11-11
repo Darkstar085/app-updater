@@ -19,6 +19,9 @@ DOWNLOAD_DIR = ROOT / "dl"
 APPS_FILE = ROOT / "apps.json"
 VERSIONS_FILE = ROOT / "latest-apk-versions.txt"
 CAPTIONS_FILE = ROOT / "captions.txt"
+UPDATES_FILE = ROOT / "updated-apps.txt"
+RELEASE_TAG = "prebuilts"
+REPOSITORY = os.getenv("GITHUB_REPOSITORY", "Darkstar085/app-updater")
 VERSION_RE = re.compile(r"(?<!\d)v?(\d+(?:\.\d+){1,3})(?!\d)", re.I)
 
 
@@ -44,6 +47,7 @@ def load_apps() -> list[tuple[str, str, str, str, str, str | None]]:
             item.get("rename"),
         )
         for item in data
+        if item.get("enabled", True)
     ]
 
 
@@ -88,7 +92,7 @@ def download_asset(app: str, repo: str, pattern: str, old: dict[str, str]) -> No
         release = latest_release(repo, pattern)
         external_version = asset_version(release, pattern)
         if external_version and old.get(app) == external_version:
-            print(f"{app} unchanged (v{external_version}) — skipping download")
+            print(f"{app} unchanged (v{external_version}) - skipping download")
             return
 
         destination.mkdir(parents=True, exist_ok=True)
@@ -220,7 +224,7 @@ def process_assets(old: dict[str, str]) -> list[tuple[str, str, Path]]:
             shutil.rmtree(DOWNLOAD_DIR / app, ignore_errors=True)
             continue
         if old.get(app) == version:
-            print(f"{app} unchanged (v{version}) — skipping")
+            print(f"{app} unchanged (v{version}) - skipping")
             shutil.rmtree(DOWNLOAD_DIR / app, ignore_errors=True)
             continue
 
@@ -288,37 +292,64 @@ def generate_metadata(updates: list[tuple[str, str, Path]], old: dict[str, str])
             handle.write("\n")
 
 
-def publish(updates: list[tuple[str, str, Path]]) -> None:
+def publish(updates: list[tuple[str, str, Path]], versions: dict[str, str]) -> None:
+    UPDATES_FILE.write_text(
+        "".join(f"{app}: {version}\n" for app, version, _path in updates),
+        encoding="utf-8",
+    )
     if not updates:
         print("No app updates to publish")
         return
 
-    now = datetime.now(timezone.utc)
-    run_id = os.getenv("GITHUB_RUN_ID")
-    tag = f"prebuilts-{run_id}" if run_id else f"prebuilts-{now:%Y%m%d%H%M%S}"
-    title = f"Prebuilts {now:%Y-%m-%d %H:%M UTC}"
-    body = "\n".join(f"- {app} v{version}" for app, version, _ in updates)
-    run(
-        [
-            "gh",
-            "release",
-            "create",
-            tag,
-            *[str(path) for _, _, path in updates],
-            str(CAPTIONS_FILE),
-            "--title",
-            title,
-            "--notes",
-            body,
-        ]
+    release_check = run(["gh", "release", "view", RELEASE_TAG], check=False)
+    if release_check.returncode != 0:
+        run([
+            "gh", "release", "create", RELEASE_TAG,
+            "--title", "Android App Updates",
+            "--notes", "Latest published versions of all tracked apps.",
+        ])
+
+    run([
+        "gh", "release", "upload", RELEASE_TAG,
+        *[str(path) for _app, _version, path in updates],
+        "--clobber",
+    ])
+
+    release = gh_api(f"repos/{REPOSITORY}/releases/tags/{RELEASE_TAG}")
+    for app, _version, current_path in updates:
+        prefix = f"{app}_v"
+        for asset in release.get("assets", []):
+            name = asset.get("name", "")
+            if (
+                name != current_path.name
+                and name.startswith(prefix)
+                and Path(name).suffix.lower() in {".apk", ".exe"}
+            ):
+                run([
+                    "gh", "api", "--method", "DELETE",
+                    f"repos/{REPOSITORY}/releases/assets/{asset['id']}",
+                ])
+
+    notes = "Latest published versions:\n\n" + "\n".join(
+        f"- {app}: {versions[app]}"
+        for app, _repo, _pattern, _description, _emoji, _rename in APPS
+        if app in versions
     )
-    print(f"Published release {tag}")
+    run([
+        "gh", "release", "edit", RELEASE_TAG,
+        "--title", "Android App Updates",
+        "--notes", notes,
+    ])
+    print(f"Updated cumulative release {RELEASE_TAG}")
 
 
 def main() -> None:
     print(f"Build started: {datetime.now(timezone.utc):%Y-%m-%d %H:%M UTC}")
     DOWNLOAD_DIR.mkdir(parents=True, exist_ok=True)
-    old = read_versions()
+    release_check = run(["gh", "release", "view", RELEASE_TAG], check=False)
+    old = read_versions() if release_check.returncode == 0 else {}
+    if release_check.returncode != 0:
+        print("No cumulative release exists; bootstrapping all tracked apps.")
     for app, repo, pattern, _desc, _emoji, _rename in APPS:
         print(f"::group::Check {app}")
         download_asset(app, repo, pattern, old)
@@ -326,7 +357,7 @@ def main() -> None:
 
     updates = process_assets(old)
     generate_metadata(updates, old)
-    publish(updates)
+    publish(updates, read_versions())
     print("Build completed")
 
 

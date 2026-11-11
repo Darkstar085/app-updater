@@ -1,4 +1,4 @@
-name: Cleanup Old Workflow Runs, Releases, and Tags
+name: Cleanup Old Workflow Runs, Caches and Pages Deployments
 
 on:
   schedule:
@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       actions: write
-      contents: write
+      deployments: write
+      contents: read
     env:
       GH_TOKEN: ${{ github.token }}
 
@@ -22,5 +23,5 @@ jobs:
       - name: Install GitHub CLI
         run: sudo apt-get update && sudo apt-get install -y gh
 
-      - name: Run cleanup
+      - name: Remove old workflow runs and caches
         run: python3 scripts/cleanup.py
