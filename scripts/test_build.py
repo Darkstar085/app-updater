@@ -31,25 +31,35 @@ class PlatformConfigTests(unittest.TestCase):
                 {"platform": "Linux", "patterns": []},
             ]})
 
-    def test_groups_platform_versions_on_one_line(self):
+    def test_groups_platforms_with_the_same_version(self):
         grouped = grouped_platform_versions({
             "Demo": {
                 "Android": {"version": "1.2.0"},
-                "Windows": {"version": "2.0.0"},
-                "iOS": {"version": "3.0.0"},
+                "Windows": {"version": "1.2.0"},
+                "iOS": {"version": "2.0.0"},
             }
         })
         self.assertEqual(
-            grouped["Demo"]["platforms"],
-            ["Windows v2.0.0", "Android v1.2.0", "iOS v3.0.0"],
+            grouped["Demo"],
+            ["Windows, Android v1.2.0", "iOS v2.0.0"],
         )
+
+    def test_filters_versions_for_the_release_platform(self):
+        grouped = grouped_platform_versions({
+            "Demo": {
+                "Android": {"version": "1.2.0"},
+                "Windows": {"version": "1.2.0"},
+                "iOS": {"version": "2.0.0"},
+            }
+        }, platform_filter="iOS")
+        self.assertEqual(grouped, {"Demo": ["iOS v2.0.0"]})
 
     def test_skips_missing_platform_versions(self):
         grouped = grouped_platform_versions({
             "Demo": {"Android": {"version": "1.2.0"}},
             "Empty": {"Windows": {}},
         })
-        self.assertEqual(grouped, {"Demo": {"platforms": ["Android v1.2.0"]}})
+        self.assertEqual(grouped, {"Demo": ["Android v1.2.0"]})
 
 
 if __name__ == "__main__":

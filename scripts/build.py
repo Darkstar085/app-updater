@@ -238,33 +238,35 @@ def write_state(state: dict) -> None:
     )
 
 
-def grouped_platform_versions(state: dict) -> dict[str, dict[str, str]]:
-    """Return app versions grouped by app, with a stable platform order."""
+def grouped_platform_versions(
+    state: dict, platform_filter: str | None = None
+) -> dict[str, list[str]]:
+    """Group platforms sharing a version, optionally for one release channel."""
     grouped = {}
     for app, platforms in state.items():
-        entries = [
-            f"{platform} v{platforms[platform]['version']}"
-            for platform in PLATFORM_ORDER
-            if platform in platforms and platforms[platform].get("version")
-        ]
-        entries.extend(
-            f"{platform} v{details['version']}"
-            for platform, details in platforms.items()
-            if platform not in PLATFORM_ORDER and details.get("version")
-        )
-        if entries:
-            grouped[app] = {"platforms": entries}
+        versions = {}
+        ordered = [name for name in PLATFORM_ORDER if name in platforms]
+        ordered.extend(name for name in platforms if name not in PLATFORM_ORDER)
+        for platform in ordered:
+            version = platforms[platform].get("version")
+            if version and (platform_filter is None or platform == platform_filter):
+                versions.setdefault(version, []).append(platform)
+        if versions:
+            grouped[app] = [
+                f"{', '.join(names)} v{version}"
+                for version, names in versions.items()
+            ]
     return grouped
 
 
-def generate_metadata(updates: list[dict], state: dict, old: dict) -> None:
-    lines = []
+def generate_metadata(updates: list[dict], old: dict) -> None:
+    changed = {}
     captions = []
     for update in updates:
         track, version = update["track"], update["version"]
         name, platform = track["name"], track["platform"]
         previous = old_track_state(old, track).get("version")
-        lines.append(f"{name}|{platform}: {version}")
+        changed.setdefault(name, {})[platform] = {"version": version}
         transition = f"🚀 Version: {previous} → {version}" if previous else f"🆕 Version: {version}"
         for path in update["files"]:
             filename = html.escape(path.name)
@@ -276,44 +278,51 @@ def generate_metadata(updates: list[dict], state: dict, old: dict) -> None:
                 f"    ----"
             )
             captions.append(caption)
+    grouped = grouped_platform_versions(changed)
+    lines = [
+        f"{name}: " + " | ".join(grouped[name])
+        for name in sorted(grouped, key=str.casefold)
+    ]
     UPDATES_FILE.write_text("".join(f"{line}\n" for line in lines), encoding="utf-8")
     CAPTIONS_FILE.write_text("\n".join(captions) + ("\n" if captions else ""), encoding="utf-8")
-
 
 def publish(updates: list[dict], old: dict, state: dict, existing_releases: dict[str, bool]) -> None:
     by_platform = {}
     for update in updates:
         by_platform.setdefault(update["track"]["platform"], []).append(update)
 
-    for platform, platform_updates in by_platform.items():
+    for platform, config in PLATFORM_RELEASES.items():
         tag = release_tag(platform)
-        config = PLATFORM_RELEASES[platform]
+        platform_updates = by_platform.get(platform, [])
         if not existing_releases.get(platform, False):
+            if not platform_updates:
+                continue
             run([
                 "gh", "release", "create", tag,
                 "--title", config["title"],
                 "--notes", f"Latest published versions for {platform}.",
             ])
 
-        paths = [str(path) for update in platform_updates for path in update["files"]]
-        run(["gh", "release", "upload", tag, *paths, "--clobber"])
+        if platform_updates:
+            paths = [str(path) for update in platform_updates for path in update["files"]]
+            run(["gh", "release", "upload", tag, *paths, "--clobber"])
 
-        release = gh_api(f"repos/{REPOSITORY}/releases/tags/{tag}")
-        for update in platform_updates:
-            track = update["track"]
-            previous_names = old_track_state(old, track).get("assets", [])
-            current_names = set(update["assets"])
-            for asset in release.get("assets", []):
-                if asset.get("name") in previous_names and asset.get("name") not in current_names:
-                    run([
-                        "gh", "api", "--method", "DELETE",
-                        f"repos/{REPOSITORY}/releases/assets/{asset['id']}",
-                    ])
+            release = gh_api(f"repos/{REPOSITORY}/releases/tags/{tag}")
+            for update in platform_updates:
+                track = update["track"]
+                previous_names = old_track_state(old, track).get("assets", [])
+                current_names = set(update["assets"])
+                for asset in release.get("assets", []):
+                    if asset.get("name") in previous_names and asset.get("name") not in current_names:
+                        run([
+                            "gh", "api", "--method", "DELETE",
+                            f"repos/{REPOSITORY}/releases/assets/{asset['id']}",
+                        ])
 
         notes = ["Latest published versions:", ""]
-        grouped = grouped_platform_versions(state)
+        grouped = grouped_platform_versions(state, platform_filter=platform)
         for name in sorted(grouped, key=str.casefold):
-            notes.append(f"- {name} | " + " | ".join(grouped[name]["platforms"]))
+            notes.append(f"- {name} | " + " | ".join(grouped[name]))
         run(["gh", "release", "edit", tag, "--title", config["title"], "--notes", "\n".join(notes)])
         print(f"Updated {platform} release ({tag})")
 
@@ -342,7 +351,7 @@ def main() -> None:
         updates.append(update)
 
     write_state(state)
-    generate_metadata(updates, state, old)
+    generate_metadata(updates, old)
     publish(updates, old, state, existing_releases)
     print(f"Build completed: {len(updates)} app/platform update(s)")
 

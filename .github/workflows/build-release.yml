@@ -155,32 +155,14 @@ jobs:
               for app in apps
               if app.get("enabled", True)
           }
-          platform_order = ("Windows", "Android", "iOS", "macOS", "Linux")
-          grouped = {}
+          updates = []
           for line in Path("updated-apps.txt").read_text(encoding="utf-8").splitlines():
               if not line.strip():
                   continue
-              name, separator, version = line.partition(":")
-              app, platform_separator, platform = name.partition("|")
-              if not separator or not platform_separator or not app.strip() or not platform.strip() or not version.strip():
+              app, separator, versions = line.partition(": ")
+              if not separator or not app.strip() or not versions.strip():
                   raise ValueError(f"Invalid update entry: {line!r}")
-              app, platform, version = app.strip(), platform.strip(), version.strip()
-              grouped.setdefault(app, {})[platform] = version
-
-          updates = []
-          for app in sorted(grouped, key=str.casefold):
-              versions = grouped[app]
-              platforms = [
-                  f"{platform} v{versions[platform]}"
-                  for platform in platform_order
-                  if platform in versions
-              ]
-              platforms.extend(
-                  f"{platform} v{version}"
-                  for platform, version in versions.items()
-                  if platform not in platform_order
-              )
-              updates.append(f"{emojis.get(app, '📦')} {app} | " + " | ".join(platforms))
+              updates.append(f"{emojis.get(app, '📦')} {app} | {versions}")
 
           if not updates:
               raise SystemExit("Update summary is empty")
