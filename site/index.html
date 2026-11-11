@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10131b">
+  <meta name="theme-color" content="#0b0f19">
   <meta name="description" content="Browse apps and installers tracked by App Updater across Android, Windows, Linux, macOS and iOS.">
   <title>App Updater</title>
   <link rel="stylesheet" href="assets/style.css">
@@ -12,32 +12,74 @@
 <body>
   <header class="hero">
     <nav>
-      <a class="brand" href="./">📦 App Updater</a>
-      <div class="nav-links">
-        <a class="github" href="https://github.com/Darkstar085/app-updater">Repository ↗</a>
-        <a class="github" href="https://github.com/Darkstar085/app-updater/releases">Releases ↗</a>
+      <a class="brand" href="./"><span class="brand-icon">📦</span> App Updater</a>
+      <div class="nav-middle">
+        <a class="nav-pill active" href="./"><span aria-hidden="true">🗂️</span> Apps</a>
+        <a class="nav-link" href="https://github.com/Darkstar085/app-updater"><span aria-hidden="true">🐙</span> Repository ↗</a>
+        <a class="nav-link" href="https://github.com/Darkstar085/app-updater/releases"><span aria-hidden="true">🚀</span> Releases ↗</a>
+      </div>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">☀️</button>
       </div>
     </nav>
-    <div class="intro">
-      <p class="eyebrow">MULTI-PLATFORM APP CATALOG</p>
-      <h1>Your apps.<br><span>Up to date.</span></h1>
-      <p class="subhead">Browse tracked applications and download the latest available builds for each platform.</p>
-      <div class="stats" aria-live="polite">
-        <div><strong id="total-count">-</strong><span>Apps tracked</span></div>
-        <div id="platform-stats" class="platform-stats"></div>
+
+    <div class="intro-grid">
+      <div class="intro-content">
+        <div class="terminal-badge">
+          <span class="t-prompt">$</span> <span class="t-cmd">app-updater --monitor --all-platforms</span><span class="t-cursor">_</span>
+        </div>
+        <h1>Your apps.<br><span>Up to date.</span></h1>
+        <p class="subhead">Browse tracked applications and download the latest available builds for each platform.</p>
+        <div class="total-badge">
+          📦 <strong id="total-count">-</strong> Apps tracked &nbsp;·&nbsp; <span style="color: #34d399; font-size: 13px;">● Live Monitor</span>
+        </div>
+      </div>
+      <div class="intro-graphic">
+        <div class="device-mockup-wrap">
+          <div class="device-glow"></div>
+          <div class="mockup-devices">
+            <div class="mock-device laptop-1">💻</div>
+            <div class="mock-device phone-1">🤖</div>
+            <div class="mock-device phone-2">🍎</div>
+            <div class="mock-device laptop-2">🐧</div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="platform-bar-container">
+      <div id="platform-stats" class="platform-stats-bar"></div>
+    </div>
   </header>
+
   <main>
     <section class="toolbar" aria-label="Filter applications">
-      <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search apps..." autocomplete="off"></label>
-      <label class="filter-label"><span class="sr-only">Category</span><select id="category"><option value="all">All categories</option></select></label>
-      <label class="filter-label"><span class="sr-only">Platform</span><select id="platform"><option value="all">All platforms</option></select></label>
+      <label class="search">
+        <span aria-hidden="true">🔍</span>
+        <input id="search" type="search" placeholder="Search apps..." autocomplete="off">
+      </label>
+      <label class="filter-label">
+        <span class="sr-only">Category</span>
+        <select id="category"><option value="all">📁 All categories</option></select>
+      </label>
+      <label class="filter-label">
+        <span class="sr-only">Platform</span>
+        <select id="platform"><option value="all">💻 All platforms</option></select>
+      </label>
     </section>
-    <div class="results-line"><p id="results-count">Loading applications…</p><p>Release information from upstream projects</p></div>
+
+    <div class="results-line">
+      <p id="results-count">Loading applications…</p>
+      <p>Release information from upstream projects ℹ️</p>
+    </div>
+
     <section id="apps" class="app-grid" aria-live="polite" aria-busy="true"></section>
     <p id="message" class="message" role="status"></p>
   </main>
-  <footer><span>App Updater</span><span>Independent release index · Not affiliated with upstream developers</span></footer>
+
+  <footer>
+    <span>App Updater · Crafted by <a href="https://darkstar085.github.io/" target="_blank" rel="noopener noreferrer" style="color: var(--accent); text-decoration: none; font-weight: 600;">Sipun (Darkstar085)</a></span>
+    <span>Independent release index · Not affiliated with upstream developers</span>
+  </footer>
 </body>
 </html>

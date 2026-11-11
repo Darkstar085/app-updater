@@ -1,6 +1,14 @@
 const state = { apps: [] };
 const $ = (id) => document.getElementById(id);
 
+const PLATFORM_ICONS = {
+  Android: "🤖",
+  Linux: "🐧",
+  Windows: "🪟",
+  iOS: "🍎",
+  macOS: "💻"
+};
+
 function render() {
   const query = $("search").value.trim().toLocaleLowerCase();
   const category = $("category").value;
@@ -15,16 +23,23 @@ function render() {
   $("results-count").textContent = `${filtered.length} of ${state.apps.length} app/platform entries`;
   $("apps").innerHTML = filtered.map((app) => {
     const downloads = Array.isArray(app.downloads) ? app.downloads : [];
+    const pIcon = PLATFORM_ICONS[app.platform] || "📦";
     const links = downloads.map((asset) => `
       <a class="download" href="${safeUrl(asset.url)}" target="_blank" rel="noopener noreferrer">
-        ${escapeHtml(asset.name)} <span aria-hidden="true">↗</span>
+        <span class="file-name">${escapeHtml(asset.name)}</span>
       </a>`).join("");
     return `
       <article class="app-card">
-        <div class="card-top"><span class="app-icon" aria-hidden="true">${escapeHtml(app.emoji)}</span><span class="platform">${escapeHtml(app.platform)}</span></div>
+        <div class="card-top">
+          <span class="app-icon" aria-hidden="true">${escapeHtml(app.emoji)}</span>
+          <span class="platform">${pIcon} ${escapeHtml(app.platform)}</span>
+        </div>
         <h2>${escapeHtml(app.name)}</h2>
         <p class="description">${escapeHtml(app.description || "No description available.")}</p>
-        <div class="meta"><span>${escapeHtml(app.category)}</span><strong>${escapeHtml(app.version)}</strong></div>
+        <div class="downloads-header">
+          <span>Downloads</span>
+          <span class="downloads-version">${escapeHtml(app.version)}</span>
+        </div>
         <div class="downloads">${links || '<span class="download unavailable">Not published yet</span>'}</div>
       </article>`;
   }).join("");
@@ -55,18 +70,32 @@ async function init() {
     if (!Array.isArray(state.apps)) throw new Error("Catalog format is invalid");
 
     const categories = [...new Set(state.apps.map((app) => app.category))].sort();
-    for (const item of categories) $("category").add(new Option(item, item));
+    for (const item of categories) $("category").add(new Option(`📁 ${item}`, item));
 
     const platforms = [...new Set(state.apps.map((app) => app.platform))].sort();
     for (const item of platforms) {
-      $("platform").add(new Option(item, item));
+      const pIcon = PLATFORM_ICONS[item] || "💻";
+      $("platform").add(new Option(`${pIcon} ${item}`, item));
+
       const count = new Set(state.apps.filter((app) => app.platform === item).map((app) => app.name)).size;
       const stat = document.createElement("div");
+      stat.className = "platform-stat-item";
+
+      const icon = document.createElement("span");
+      icon.className = "p-icon";
+      icon.textContent = pIcon;
+
+      const info = document.createElement("div");
+      info.className = "p-info";
+
       const total = document.createElement("strong");
-      const label = document.createElement("span");
       total.textContent = count;
+
+      const label = document.createElement("span");
       label.textContent = item;
-      stat.append(total, label);
+
+      info.append(total, label);
+      stat.append(icon, info);
       $("platform-stats").append(stat);
     }
 
@@ -77,6 +106,20 @@ async function init() {
     $("results-count").textContent = "Catalog unavailable";
     $("message").textContent = `${error.message}. Please try again later.`;
   }
+}
+
+// Theme toggle
+const themeToggle = $("theme-toggle");
+if (themeToggle) {
+  const currentTheme = localStorage.getItem("theme") || "dark";
+  document.documentElement.setAttribute("data-theme", currentTheme);
+  themeToggle.textContent = currentTheme === "light" ? "🌙" : "☀️";
+  themeToggle.addEventListener("click", () => {
+    const theme = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    themeToggle.textContent = theme === "light" ? "🌙" : "☀️";
+  });
 }
 
 for (const id of ["search", "category", "platform"]) {
