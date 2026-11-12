@@ -31,7 +31,7 @@ function render() {
   $("apps").innerHTML = filtered.map((app, index) => `
     <article class="app-card" data-app-index="${state.apps.indexOf(app)}" tabindex="0" role="button" aria-label="View ${escapeHtml(app.name)} details" style="--card-index:${Math.min(index, 11)}">
       <div class="card-glow"></div><div class="card-top"><span class="app-icon" aria-hidden="true">${escapeHtml(app.emoji || "📦")}</span><span class="platform">${PLATFORM_ICONS[app.platform] || "📦"} ${escapeHtml(app.platform)}</span></div>
-      <div class="card-title-row"><h3>${escapeHtml(app.name)}</h3><span class="card-arrow" aria-hidden="true">↗</span></div>
+      <div class="card-title-row"><h3>${escapeHtml(app.name)}</h3><span class="card-arrow" aria-hidden="true"></span></div>
       <p class="description">${escapeHtml(app.description || "No description available.")}</p>
       <div class="card-bottom"><span class="category-tag">${escapeHtml(app.category || "Other")}</span><span class="version-tag">v${escapeHtml(app.version || "—")}</span></div>
       <div class="card-hint"><span>View details & downloads</span><span aria-hidden="true">→</span></div>
@@ -53,9 +53,9 @@ function openDetails(app) {
     <div class="dialog-downloads">${downloads.map((asset) => {
       const url = safeUrl(asset.url);
       return url === "#" ? `<span class="dialog-download unavailable">${escapeHtml(asset.name)} <small>Unavailable</small></span>`
-        : `<a class="dialog-download" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer"><span>⇩</span><span class="dialog-file-name">${escapeHtml(asset.name)}</span><span>↗</span></a>`;
+        : `<a class="dialog-download" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer"><span>⇩</span><span class="dialog-file-name">${escapeHtml(asset.name)}</span></a>`;
     }).join("") || '<p class="dialog-empty">No published downloads for this platform yet.</p>'}</div>
-    ${repository ? `<a class="source-link" href="https://github.com/${escapeHtml(repository)}" target="_blank" rel="noopener noreferrer">View source repository ↗</a>` : ""}`;
+    ${repository ? `<a class="source-link" href="https://github.com/${escapeHtml(repository)}" target="_blank" rel="noopener noreferrer">View source repository</a>` : ""}`;
   if (!$("app-dialog").open) $("app-dialog").showModal();
 }
 
