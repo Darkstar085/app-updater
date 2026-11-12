@@ -181,20 +181,32 @@ async function init() {
     if (!response.ok) throw new Error(`Catalog request failed (${response.status})`);
     state.apps = await response.json();
     if (!Array.isArray(state.apps)) throw new Error("Catalog format is invalid");
-    for (const item of [...new Set(state.apps.map((app) => app.category))].sort()) $("category").add(new Option(item, item));
-    const platformOrder = ["Android", "Linux", "Windows", "iOS", "macOS"];
-    for (const item of [...new Set(state.apps.map((app) => app.platform))].sort((a, b) => platformOrder.indexOf(a) - platformOrder.indexOf(b))) {
-      const count = new Set(state.apps.filter((app) => app.platform === item).map((app) => app.name)).size;
-      const stat = document.createElement("div"); stat.className = "platform-stat-item";
-      stat.innerHTML = `<span class="p-icon">${platformIcon(item)}</span><div class="p-info"><strong>${count}</strong><span>${escapeHtml(item)}</span></div>`;
-      $("platform-stats").append(stat);
+    const categoryEl = $("category");
+    if (categoryEl) {
+      for (const item of [...new Set(state.apps.map((app) => app.category))].sort()) categoryEl.add(new Option(item, item));
     }
-    renderFilterOptions(); initFilters();
-    $("total-count").textContent = new Set(state.apps.map((app) => app.name)).size;
+    const platformOrder = ["Android", "Linux", "Windows", "iOS", "macOS"];
+    const platformStatsEl = $("platform-stats");
+    if (platformStatsEl) {
+      for (const item of [...new Set(state.apps.map((app) => app.platform))].sort((a, b) => platformOrder.indexOf(a) - platformOrder.indexOf(b))) {
+        const count = new Set(state.apps.filter((app) => app.platform === item).map((app) => app.name)).size;
+        const stat = document.createElement("div"); stat.className = "platform-stat-item";
+        stat.innerHTML = `<span class="p-icon">${platformIcon(item)}</span><div class="p-info"><strong>${count}</strong><span>${escapeHtml(item)}</span></div>`;
+        platformStatsEl.append(stat);
+      }
+    }
+    if (typeof renderFilterOptions === "function") renderFilterOptions();
+    if (typeof initFilters === "function") initFilters();
+    const totalCountEl = $("total-count");
+    if (totalCountEl) totalCountEl.textContent = new Set(state.apps.map((app) => app.name)).size;
     render();
   } catch (error) {
-    $("apps").setAttribute("aria-busy", "false"); $("results-count").textContent = "Catalog unavailable";
-    $("message").textContent = `${error.message}. Please try again later.`;
+    const appsEl = $("apps");
+    if (appsEl) appsEl.setAttribute("aria-busy", "false");
+    const resultsCountEl = $("results-count");
+    if (resultsCountEl) resultsCountEl.textContent = "Catalog unavailable";
+    const msgEl = $("message");
+    if (msgEl) msgEl.textContent = `${error.message}. Please try again later.`;
   }
 }
 $("search").addEventListener("input", render);
