@@ -62,25 +62,6 @@ App Updater monitors selected GitHub repositories, detects new releases, downloa
 
 The old `prebuilts` release is retained as a legacy archive. New updates are published to the platform channels above.
 
-## 🌍 Multi-platform applications
-
-These configured upstream projects publish assets for more than one platform:
-
-| App | Platforms tracked |
-|---|---|
-| ABDownloadManager | Android, Windows, Linux, macOS |
-| Kudu | Windows, Linux, macOS |
-| LocalSend | Android, Windows, Linux, macOS |
-| ConverterNOW | Android, Windows, Linux |
-| Quantum Download Manager | Windows, Linux, macOS |
-| Cromite | Android, Windows, Linux |
-| SimpMusic | Android, Windows, Linux, macOS |
-| Mornye | Android, iOS* |
-
-`apps.json` contains the full set of 65 configured apps and the upstream asset patterns. Other apps remain in their supported platform channels when new releases appear.
-
-* Mornye's current iOS IPA asset is unsigned. It requires signing and a compatible sideloading method before it can be installed.
-
 ## 🌐 Web Dashboard
 
 The searchable GitHub Pages catalog lists app versions, categories, platforms, and all published download links.
