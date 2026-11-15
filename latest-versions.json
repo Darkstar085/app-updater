@@ -1,0 +1,641 @@
+{
+  "ABDownloadManager": {
+    "Android": {
+      "assets": [
+        "ABDownloadManager_v1.11.4.apk"
+      ],
+      "version": "1.11.4"
+    },
+    "Linux": {
+      "assets": [
+        "ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_linux_arm64.tar.gz",
+        "ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_linux_x64.tar.gz"
+      ],
+      "version": "1.11.4"
+    },
+    "Windows": {
+      "assets": [
+        "ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_windows_arm64.exe",
+        "ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_windows_arm64.zip",
+        "ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_windows_x64.exe",
+        "ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_windows_x64.zip"
+      ],
+      "version": "1.11.4"
+    },
+    "macOS": {
+      "assets": [
+        "ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_mac_arm64.dmg",
+        "ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_mac_x64.dmg"
+      ],
+      "version": "1.11.4"
+    }
+  },
+  "Aegis": {
+    "Android": {
+      "assets": [
+        "Aegis_v3.4.3.apk"
+      ],
+      "version": "3.4.3"
+    }
+  },
+  "AmarokHider": {
+    "Android": {
+      "assets": [
+        "AmarokHider_v0.10.1.apk"
+      ],
+      "version": "0.10.1"
+    }
+  },
+  "Arcticons": {
+    "Android": {
+      "assets": [
+        "Arcticons_v15.4.7.apk"
+      ],
+      "version": "15.4.7"
+    }
+  },
+  "Bitwarden": {
+    "Android": {
+      "assets": [
+        "Bitwarden_v2026.11.0.apk"
+      ],
+      "version": "2026.11.0"
+    }
+  },
+  "BreezyWeather": {
+    "Android": {
+      "assets": [
+        "BreezyWeather_v6.2.2_freenet.apk"
+      ],
+      "version": "6.2.2_freenet"
+    }
+  },
+  "Cherrygram": {
+    "Android": {
+      "assets": [
+        "Cherrygram_v13.1.1.apk"
+      ],
+      "version": "13.1.1"
+    }
+  },
+  "ConverterNOW": {
+    "Android": {
+      "assets": [
+        "ConverterNOW_v4.7.0.apk"
+      ],
+      "version": "4.7.0"
+    },
+    "Linux": {
+      "assets": [
+        "ConverterNOW_v4.7.0_converternow-aarch64.AppImage",
+        "ConverterNOW_v4.7.0_converternow-linux-aarch64.tar.gz",
+        "ConverterNOW_v4.7.0_converternow-linux-x86_64.tar.gz",
+        "ConverterNOW_v4.7.0_converternow-x86_64.AppImage"
+      ],
+      "version": "4.7.0"
+    },
+    "Windows": {
+      "assets": [
+        "ConverterNOW_v4.7.0_converternow-windows-setup.exe",
+        "ConverterNOW_v4.7.0_converternow-windows.msix"
+      ],
+      "version": "4.7.0"
+    }
+  },
+  "CpuInfo": {
+    "Android": {
+      "assets": [
+        "CpuInfo_v6.7.0.apk"
+      ],
+      "version": "6.7.0"
+    }
+  },
+  "Cromite": {
+    "Android": {
+      "assets": [
+        "Cromite_v153.0.8010.37.apk"
+      ],
+      "version": "153.0.8010.37"
+    },
+    "Linux": {
+      "assets": [
+        "Cromite_v153.0.8010.37_chrome-lin64.tar.gz"
+      ],
+      "version": "153.0.8010.37"
+    },
+    "Windows": {
+      "assets": [
+        "Cromite_v153.0.8010.37_chrome-win.zip"
+      ],
+      "version": "153.0.8010.37"
+    }
+  },
+  "DeltaIcons": {
+    "Android": {
+      "assets": [
+        "DeltaIcons_v2.21.0.apk"
+      ],
+      "version": "2.21.0"
+    }
+  },
+  "Downly": {
+    "Android": {
+      "assets": [
+        "Downly_v1.3.apk"
+      ],
+      "version": "1.3"
+    }
+  },
+  "DuckDuckGo": {
+    "Android": {
+      "assets": [
+        "DuckDuckGo_v5.303.0.apk"
+      ],
+      "version": "5.303.0"
+    }
+  },
+  "Flip2DND": {
+    "Android": {
+      "assets": [
+        "Flip2DND_v12.1.1-free.apk"
+      ],
+      "version": "12.1.1-free"
+    }
+  },
+  "Florisboard": {
+    "Android": {
+      "assets": [
+        "Florisboard_v0.5.2.apk"
+      ],
+      "version": "0.5.2"
+    }
+  },
+  "Fossify_Calculator": {
+    "Android": {
+      "assets": [
+        "Fossify_Calculator_v1.4.0.apk"
+      ],
+      "version": "1.4.0"
+    }
+  },
+  "Fossify_Keyboard": {
+    "Android": {
+      "assets": [
+        "Fossify_Keyboard_v1.9.1.apk"
+      ],
+      "version": "1.9.1"
+    }
+  },
+  "Fossify_MusicPlayer": {
+    "Android": {
+      "assets": [
+        "Fossify_MusicPlayer_v1.8.5.apk"
+      ],
+      "version": "1.8.5"
+    }
+  },
+  "Fossify_Notes": {
+    "Android": {
+      "assets": [
+        "Fossify_Notes_v1.7.0.apk"
+      ],
+      "version": "1.7.0"
+    }
+  },
+  "Fossify_VoiceRecorder": {
+    "Android": {
+      "assets": [
+        "Fossify_VoiceRecorder_v1.7.4.apk"
+      ],
+      "version": "1.7.4"
+    }
+  },
+  "GooglePhotos": {
+    "Android": {
+      "assets": [
+        "GooglePhotos_v7.92.0.977185651.apk"
+      ],
+      "version": "7.92.0.977185651"
+    }
+  },
+  "Gramophone": {
+    "Android": {
+      "assets": [
+        "Gramophone_v1.1.2.apk"
+      ],
+      "version": "1.1.2"
+    }
+  },
+  "IceravenBrowser": {
+    "Android": {
+      "assets": [
+        "IceravenBrowser_viceraven-2.52.0.apk"
+      ],
+      "version": "iceraven-2.52.0"
+    }
+  },
+  "Kudu": {
+    "Linux": {
+      "assets": [
+        "Kudu_v3.13.0_Kudu-3.13.0-amd64.deb",
+        "Kudu_v3.13.0_Kudu-3.13.0-arm64.deb",
+        "Kudu_v3.13.0_Kudu-arm64.AppImage",
+        "Kudu_v3.13.0_Kudu-x86_64.AppImage"
+      ],
+      "version": "3.13.0"
+    },
+    "Windows": {
+      "assets": [
+        "Kudu_v3.13.0_Kudu-Portable-3.13.0-arm64.exe",
+        "Kudu_v3.13.0_Kudu-Portable-3.13.0.exe",
+        "Kudu_v3.13.0_Kudu-Setup-3.13.0-arm64.exe",
+        "Kudu_v3.13.0_Kudu-Setup-3.13.0.exe"
+      ],
+      "version": "3.13.0"
+    },
+    "macOS": {
+      "assets": [
+        "Kudu_v3.13.0_Kudu-3.13.0-arm64.dmg",
+        "Kudu_v3.13.0_Kudu-3.13.0-x64.dmg"
+      ],
+      "version": "3.13.0"
+    }
+  },
+  "LTECleanerFOSS": {
+    "Android": {
+      "assets": [
+        "LTECleanerFOSS_v5.1.0.apk"
+      ],
+      "version": "5.1.0"
+    }
+  },
+  "LibreCuts": {
+    "Android": {
+      "assets": [
+        "LibreCuts_v1.0-beta7.apk"
+      ],
+      "version": "1.0-beta7"
+    }
+  },
+  "LibreTube": {
+    "Android": {
+      "assets": [
+        "LibreTube_v32.1.apk"
+      ],
+      "version": "32.1"
+    }
+  },
+  "LocalSend": {
+    "Android": {
+      "assets": [
+        "LocalSend_v1.18.2.apk"
+      ],
+      "version": "1.18.2"
+    },
+    "Linux": {
+      "assets": [
+        "LocalSend_v1.18.2_LocalSend-1.18.2-linux-arm-64.deb",
+        "LocalSend_v1.18.2_LocalSend-1.18.2-linux-arm-64.tar.gz",
+        "LocalSend_v1.18.2_LocalSend-1.18.2-linux-x86-64.AppImage",
+        "LocalSend_v1.18.2_LocalSend-1.18.2-linux-x86-64.deb",
+        "LocalSend_v1.18.2_LocalSend-1.18.2-linux-x86-64.tar.gz",
+        "LocalSend_v1.18.2_LocalSend-CLI-1.18.2-linux-arm-64.tar.gz",
+        "LocalSend_v1.18.2_LocalSend-CLI-1.18.2-linux-x86-64.tar.gz"
+      ],
+      "version": "1.18.2"
+    },
+    "Windows": {
+      "assets": [
+        "LocalSend_v1.18.2_LocalSend-1.18.2-windows-arm-64.zip",
+        "LocalSend_v1.18.2_LocalSend-1.18.2-windows-x86-64.exe",
+        "LocalSend_v1.18.2_LocalSend-CLI-1.18.2-windows-x86-64.exe"
+      ],
+      "version": "1.18.2"
+    },
+    "macOS": {
+      "assets": [
+        "LocalSend_v1.18.2_LocalSend-1.18.2.dmg"
+      ],
+      "version": "1.18.2"
+    }
+  },
+  "Magisk": {
+    "Android": {
+      "assets": [
+        "Magisk_v31.1.apk"
+      ],
+      "version": "31.1"
+    }
+  },
+  "MicroG_RE": {
+    "Android": {
+      "assets": [
+        "MicroG_RE_v7.3.1.apk"
+      ],
+      "version": "7.3.1"
+    }
+  },
+  "MoeList": {
+    "Android": {
+      "assets": [
+        "MoeList_v3.8.0.apk"
+      ],
+      "version": "3.8.0"
+    }
+  },
+  "Momogram": {
+    "Android": {
+      "assets": [
+        "Momogram_v13.1.1-0b74839817.apk"
+      ],
+      "version": "13.1.1-0b74839817"
+    }
+  },
+  "Mornye": {
+    "Android": {
+      "assets": [
+        "Mornye_v5.3.1-hotfix.2.apk"
+      ],
+      "version": "5.3.1-hotfix.2"
+    },
+    "iOS": {
+      "assets": [
+        "Mornye_v5.3.1_Mornye-v5.3.1-ios-unsigned.ipa"
+      ],
+      "version": "5.3.1"
+    }
+  },
+  "Morphe_Manager": {
+    "Android": {
+      "assets": [
+        "Morphe_Manager_v2.5.0.apk"
+      ],
+      "version": "2.5.0"
+    }
+  },
+  "Morphe_MicroG": {
+    "Android": {
+      "assets": [
+        "Morphe_MicroG_v7.3.1.apk"
+      ],
+      "version": "7.3.1"
+    }
+  },
+  "Morphe_YTMusic": {
+    "Android": {
+      "assets": [
+        "Morphe_YTMusic_v9.30.53.apk"
+      ],
+      "version": "9.30.53"
+    }
+  },
+  "Morphe_YouTube": {
+    "Android": {
+      "assets": [
+        "Morphe_YouTube_v21.30.216.apk"
+      ],
+      "version": "21.30.216"
+    }
+  },
+  "Nekogram": {
+    "Android": {
+      "assets": [
+        "Nekogram_v13.2.2.apk"
+      ],
+      "version": "13.2.2"
+    }
+  },
+  "NopeRemote": {
+    "Android": {
+      "assets": [
+        "NopeRemote_v2.6.apk"
+      ],
+      "version": "2.6"
+    }
+  },
+  "Omni": {
+    "Android": {
+      "assets": [
+        "Omni_v1.3.apk"
+      ],
+      "version": "1.3"
+    }
+  },
+  "OrganicMaps": {
+    "Android": {
+      "assets": [
+        "OrganicMaps_v2026.11.11-39-Web.apk"
+      ],
+      "version": "2026.11.11-39-Web"
+    }
+  },
+  "OuterTune": {
+    "Android": {
+      "assets": [
+        "OuterTune_v0.10.1.apk"
+      ],
+      "version": "0.10.1"
+    }
+  },
+  "PhonographPlus": {
+    "Android": {
+      "assets": [
+        "PhonographPlus_v2.0.2.apk"
+      ],
+      "version": "2.0.2"
+    }
+  },
+  "Pixelplay": {
+    "Android": {
+      "assets": [
+        "Pixelplay_v0.7.5-beta.apk"
+      ],
+      "version": "0.7.5-beta"
+    }
+  },
+  "PrismFileExplorer": {
+    "Android": {
+      "assets": [
+        "PrismFileExplorer_v1.3.2.apk"
+      ],
+      "version": "1.3.2"
+    }
+  },
+  "Quantum_Download_Manager": {
+    "Linux": {
+      "assets": [
+        "Quantum_Download_Manager_v1.0.3_Quantum.Download.Manager_1.0.3_amd64.AppImage",
+        "Quantum_Download_Manager_v1.0.3_Quantum.Download.Manager_1.0.3_amd64.deb"
+      ],
+      "version": "1.0.3"
+    },
+    "Windows": {
+      "assets": [
+        "Quantum_Download_Manager_v1.0.3_Quantum.Download.Manager_1.0.3_x64-setup.exe",
+        "Quantum_Download_Manager_v1.0.3_Quantum.Download.Manager_1.0.3_x64_en-US.msi"
+      ],
+      "version": "1.0.3"
+    },
+    "macOS": {
+      "assets": [
+        "Quantum_Download_Manager_v1.0.3_Quantum.Download.Manager_1.0.3_aarch64.dmg"
+      ],
+      "version": "1.0.3"
+    }
+  },
+  "ReFra": {
+    "Android": {
+      "assets": [
+        "ReFra_v5.2.2.apk"
+      ],
+      "version": "5.2.2"
+    }
+  },
+  "RetroMusicPlayer": {
+    "Android": {
+      "assets": [
+        "RetroMusicPlayer_v7.0.3.apk"
+      ],
+      "version": "7.0.3"
+    }
+  },
+  "Sdmaid": {
+    "Android": {
+      "assets": [
+        "Sdmaid_v2.2.2-rc0.apk"
+      ],
+      "version": "2.2.2-rc0"
+    }
+  },
+  "Shizuku": {
+    "Android": {
+      "assets": [
+        "Shizuku_v13.6.0.r1086.2650830c.apk"
+      ],
+      "version": "13.6.0.r1086.2650830c"
+    }
+  },
+  "SimpMusic": {
+    "Android": {
+      "assets": [
+        "SimpMusic_v2.6.0.apk"
+      ],
+      "version": "2.6.0"
+    },
+    "Linux": {
+      "assets": [
+        "SimpMusic_v2.6.0_SimpMusic-x86_64.AppImage"
+      ],
+      "version": "2.6.0"
+    },
+    "Windows": {
+      "assets": [
+        "SimpMusic_v2.6.0_SimpMusic-Windows-installer.zip"
+      ],
+      "version": "2.6.0"
+    },
+    "macOS": {
+      "assets": [
+        "SimpMusic_v2.6.0_SimpMusic-2.6.0-mac-aarch64.dmg",
+        "SimpMusic_v2.6.0_SimpMusic-2.6.0-mac-amd64.dmg"
+      ],
+      "version": "2.6.0"
+    }
+  },
+  "Sonora": {
+    "Android": {
+      "assets": [
+        "Sonora_v3.1.apk"
+      ],
+      "version": "3.1"
+    }
+  },
+  "SpeedIndicator": {
+    "Android": {
+      "assets": [
+        "SpeedIndicator_v4.0.apk"
+      ],
+      "version": "4.0"
+    }
+  },
+  "Superiorwalls": {
+    "Android": {
+      "assets": [
+        "Superiorwalls_v1.6.apk"
+      ],
+      "version": "1.6"
+    }
+  },
+  "Symphony": {
+    "Android": {
+      "assets": [
+        "Symphony_v2024.12.115.apk"
+      ],
+      "version": "2024.12.115"
+    }
+  },
+  "Termux": {
+    "Android": {
+      "assets": [
+        "Termux_v0.118.3.apk"
+      ],
+      "version": "0.118.3"
+    }
+  },
+  "ThunderbirdAndroid": {
+    "Android": {
+      "assets": [
+        "ThunderbirdAndroid_v25.0.apk"
+      ],
+      "version": "25.0"
+    }
+  },
+  "Twitter": {
+    "Android": {
+      "assets": [
+        "Twitter_v12.40.1-prod.01.apk"
+      ],
+      "version": "12.40.1-prod.01"
+    }
+  },
+  "VisualCodeSpace": {
+    "Android": {
+      "assets": [
+        "VisualCodeSpace_v2.0.1.apk"
+      ],
+      "version": "2.0.1"
+    }
+  },
+  "Wallora": {
+    "Android": {
+      "assets": [
+        "Wallora_v2.0.apk"
+      ],
+      "version": "2.0"
+    }
+  },
+  "WeatherMaster": {
+    "Android": {
+      "assets": [
+        "WeatherMaster_v3.11.0.apk"
+      ],
+      "version": "3.11.0"
+    }
+  },
+  "XedEditor": {
+    "Android": {
+      "assets": [
+        "XedEditor_v3.4.5.apk"
+      ],
+      "version": "3.4.5"
+    }
+  },
+  "Ytdlnis": {
+    "Android": {
+      "assets": [
+        "Ytdlnis_v1.9.1.1.apk"
+      ],
+      "version": "1.9.1.1"
+    }
+  }
+}
