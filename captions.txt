@@ -1,648 +1,126 @@
-📦 <b>File name</b> – Downly_v1.3.apk
-    📥 Download manager for Android (Android)
-🆕 Version: 1.3
-
-Changelog: <a href='https://github.com/Darkstar085/Downly/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – SpeedIndicator_v4.0.apk
-    📶 Network speed indicator for Android (Android)
-🆕 Version: 4.0
-
-Changelog: <a href='https://github.com/Darkstar085/SpeedIndicator/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_windows_arm64.exe
-    📥 Powerful download manager with multi-threading (Windows)
-🆕 Version: 1.11.4
-
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_windows_arm64.zip
-    📥 Powerful download manager with multi-threading (Windows)
-🆕 Version: 1.11.4
-
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_windows_x64.exe
-    📥 Powerful download manager with multi-threading (Windows)
-🆕 Version: 1.11.4
-
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_windows_x64.zip
-    📥 Powerful download manager with multi-threading (Windows)
-🆕 Version: 1.11.4
-
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – ABDownloadManager_v1.11.4.apk
-    📥 Powerful download manager with multi-threading (Android)
-🆕 Version: 1.11.4
-
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_linux_arm64.tar.gz
-    📥 Powerful download manager with multi-threading (Linux)
-🆕 Version: 1.11.4
-
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_linux_x64.tar.gz
-    📥 Powerful download manager with multi-threading (Linux)
-🆕 Version: 1.11.4
-
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_mac_arm64.dmg
-    📥 Powerful download manager with multi-threading (macOS)
-🆕 Version: 1.11.4
-
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – ABDownloadManager_v1.11.4_ABDownloadManager_1.11.4_mac_x64.dmg
-    📥 Powerful download manager with multi-threading (macOS)
-🆕 Version: 1.11.4
-
-Changelog: <a href='https://github.com/amir1376/ab-download-manager/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Aegis_v3.4.3.apk
-    🔐 Modern two-factor authentication app (Android)
-🆕 Version: 3.4.3
-
-Changelog: <a href='https://github.com/beemdevelopment/Aegis/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – NopeRemote_v2.6.apk
-    📺 Open-source universal IR remote control app for Android (Android)
-🆕 Version: 2.6
-
-Changelog: <a href='https://github.com/monuk7735/nope-remote/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Kudu_v3.13.0_Kudu-Portable-3.13.0-arm64.exe
-    🧹 Open-source system cleaner and security scanner for Windows, macOS and Linux (Windows)
-🆕 Version: 3.13.0
-
-Changelog: <a href='https://github.com/AdventDevInc/kudu/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Kudu_v3.13.0_Kudu-Portable-3.13.0.exe
-    🧹 Open-source system cleaner and security scanner for Windows, macOS and Linux (Windows)
-🆕 Version: 3.13.0
-
-Changelog: <a href='https://github.com/AdventDevInc/kudu/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Kudu_v3.13.0_Kudu-Setup-3.13.0-arm64.exe
-    🧹 Open-source system cleaner and security scanner for Windows, macOS and Linux (Windows)
-🆕 Version: 3.13.0
-
-Changelog: <a href='https://github.com/AdventDevInc/kudu/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Kudu_v3.13.0_Kudu-Setup-3.13.0.exe
-    🧹 Open-source system cleaner and security scanner for Windows, macOS and Linux (Windows)
-🆕 Version: 3.13.0
-
-Changelog: <a href='https://github.com/AdventDevInc/kudu/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Kudu_v3.13.0_Kudu-3.13.0-amd64.deb
-    🧹 Open-source system cleaner and security scanner for Windows, macOS and Linux (Linux)
-🆕 Version: 3.13.0
-
-Changelog: <a href='https://github.com/AdventDevInc/kudu/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Kudu_v3.13.0_Kudu-3.13.0-arm64.deb
-    🧹 Open-source system cleaner and security scanner for Windows, macOS and Linux (Linux)
-🆕 Version: 3.13.0
-
-Changelog: <a href='https://github.com/AdventDevInc/kudu/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Kudu_v3.13.0_Kudu-arm64.AppImage
-    🧹 Open-source system cleaner and security scanner for Windows, macOS and Linux (Linux)
-🆕 Version: 3.13.0
-
-Changelog: <a href='https://github.com/AdventDevInc/kudu/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Kudu_v3.13.0_Kudu-x86_64.AppImage
-    🧹 Open-source system cleaner and security scanner for Windows, macOS and Linux (Linux)
-🆕 Version: 3.13.0
-
-Changelog: <a href='https://github.com/AdventDevInc/kudu/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Kudu_v3.13.0_Kudu-3.13.0-arm64.dmg
-    🧹 Open-source system cleaner and security scanner for Windows, macOS and Linux (macOS)
-🆕 Version: 3.13.0
-
-Changelog: <a href='https://github.com/AdventDevInc/kudu/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Kudu_v3.13.0_Kudu-3.13.0-x64.dmg
-    🧹 Open-source system cleaner and security scanner for Windows, macOS and Linux (macOS)
-🆕 Version: 3.13.0
-
-Changelog: <a href='https://github.com/AdventDevInc/kudu/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Mornye_v5.3.1-hotfix.2.apk
+📦 <b>File name</b> – Mornye_v5.4.0.apk
     🎵 Music streaming and discovery app for Android (Android)
-🆕 Version: 5.3.1-hotfix.2
+🚀 Version: 5.3.1-hotfix.2 → 5.4.0
 
 Changelog: <a href='https://github.com/mornyeapp/Mornye/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – Mornye_v5.3.1_Mornye-v5.3.1-ios-unsigned.ipa
+📦 <b>File name</b> – Mornye_v5.4.0_Mornye-v5.4.0-ios-unsigned.ipa
     🎵 Music streaming and discovery app for Android (iOS)
-🆕 Version: 5.3.1
+🚀 Version: 5.3.1 → 5.4.0
 
 Changelog: <a href='https://github.com/mornyeapp/Mornye/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – LibreCuts_v1.0-beta7.apk
-    🎬 Free, open-source video editor for Android (Android)
-🆕 Version: 1.0-beta7
-
-Changelog: <a href='https://github.com/tharunbirla/LibreCuts/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – OrganicMaps_v2026.11.11-39-Web.apk
-    🗺️ Privacy-focused offline maps and navigation app (Android)
-🆕 Version: 2026.11.11-39-Web
-
-Changelog: <a href='https://github.com/organicmaps/organicmaps/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – AmarokHider_v0.10.1.apk
-    🙈 Hide apps as your choice (Android)
-🆕 Version: 0.10.1
-
-Changelog: <a href='https://github.com/deltazefiro/Amarok-Hider/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Arcticons_v15.4.7.apk
-    🎭 Modern icon pack and theming app (Android)
-🆕 Version: 15.4.7
-
-Changelog: <a href='https://github.com/Arcticons-Team/Arcticons/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Bitwarden_v2026.11.0.apk
+📦 <b>File name</b> – Bitwarden_v2026.11.1.apk
     🔑 Open-source password manager with cloud sync (Android)
-🆕 Version: 2026.11.0
+🚀 Version: 2026.11.0 → 2026.11.1
 
 Changelog: <a href='https://github.com/bitwarden/android/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – BreezyWeather_v6.2.2_freenet.apk
-    🌦️ Clean, customizable open-source weather app (Android)
-🆕 Version: 6.2.2_freenet
-
-Changelog: <a href='https://github.com/breezy-weather/breezy-weather/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Cherrygram_v13.1.1.apk
+📦 <b>File name</b> – Cherrygram_v13.2.2.apk
     🍒 Enhanced Telegram client with extra features (Android)
-🆕 Version: 13.1.1
+🚀 Version: 13.1.1 → 13.2.2
 
 Changelog: <a href='https://github.com/arsLan4k1390/Cherrygram/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – ConverterNOW_v4.7.0.apk
+📦 <b>File name</b> – ConverterNOW_v4.7.1.apk
     🔄 Simple unit and currency converter (Android)
-🆕 Version: 4.7.0
+🚀 Version: 4.7.0 → 4.7.1
 
 Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – ConverterNOW_v4.7.0_converternow-windows-setup.exe
+📦 <b>File name</b> – ConverterNOW_v4.7.1_converternow-windows-setup.exe
     🔄 Simple unit and currency converter (Windows)
-🆕 Version: 4.7.0
+🚀 Version: 4.7.0 → 4.7.1
 
 Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – ConverterNOW_v4.7.0_converternow-windows.msix
+📦 <b>File name</b> – ConverterNOW_v4.7.1_converternow-windows.msix
     🔄 Simple unit and currency converter (Windows)
-🆕 Version: 4.7.0
+🚀 Version: 4.7.0 → 4.7.1
 
 Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – ConverterNOW_v4.7.0_converternow-aarch64.AppImage
+📦 <b>File name</b> – ConverterNOW_v4.7.1_converternow-aarch64.AppImage
     🔄 Simple unit and currency converter (Linux)
-🆕 Version: 4.7.0
+🚀 Version: 4.7.0 → 4.7.1
 
 Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – ConverterNOW_v4.7.0_converternow-linux-aarch64.tar.gz
+📦 <b>File name</b> – ConverterNOW_v4.7.1_converternow-linux-aarch64.tar.gz
     🔄 Simple unit and currency converter (Linux)
-🆕 Version: 4.7.0
+🚀 Version: 4.7.0 → 4.7.1
 
 Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – ConverterNOW_v4.7.0_converternow-linux-x86_64.tar.gz
+📦 <b>File name</b> – ConverterNOW_v4.7.1_converternow-linux-x86_64.tar.gz
     🔄 Simple unit and currency converter (Linux)
-🆕 Version: 4.7.0
+🚀 Version: 4.7.0 → 4.7.1
 
 Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – ConverterNOW_v4.7.0_converternow-x86_64.AppImage
+📦 <b>File name</b> – ConverterNOW_v4.7.1_converternow-x86_64.AppImage
     🔄 Simple unit and currency converter (Linux)
-🆕 Version: 4.7.0
+🚀 Version: 4.7.0 → 4.7.1
 
 Changelog: <a href='https://github.com/ferraridamiano/ConverterNOW/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – Cromite_v153.0.8010.37.apk
-    🌐 Bromite-based privacy browser (Android)
-🆕 Version: 153.0.8010.37
-
-Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Cromite_v153.0.8010.37_chrome-win.zip
-    🌐 Bromite-based privacy browser (Windows)
-🆕 Version: 153.0.8010.37
-
-Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Cromite_v153.0.8010.37_chrome-lin64.tar.gz
-    🌐 Bromite-based privacy browser (Linux)
-🆕 Version: 153.0.8010.37
-
-Changelog: <a href='https://github.com/uazo/cromite/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – CpuInfo_v6.7.0.apk
-    💻 Detailed CPU info tool (Android)
-🆕 Version: 6.7.0
-
-Changelog: <a href='https://github.com/kamgurgul/cpu-info/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – DeltaIcons_v2.21.0.apk
-    🎨 Beautiful, minimal icon pack (Android)
-🆕 Version: 2.21.0
-
-Changelog: <a href='https://github.com/Delta-Icons/android/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – ReFra_v5.2.2.apk
-    📷 Jetpack Compose-based photo gallery app (Android)
-🆕 Version: 5.2.2
-
-Changelog: <a href='https://github.com/IacobIonut01/ReFra/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – DuckDuckGo_v5.303.0.apk
+📦 <b>File name</b> – DuckDuckGo_v5.304.0.apk
     🦆 Private, tracker-blocking browser (Android)
-🆕 Version: 5.303.0
+🚀 Version: 5.303.0 → 5.304.0
 
 Changelog: <a href='https://github.com/duckduckgo/Android/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – Florisboard_v0.5.2.apk
-    ⌨️ Privacy-friendly Android keyboard (Android)
-🆕 Version: 0.5.2
-
-Changelog: <a href='https://github.com/florisboard/florisboard/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Flip2DND_v12.1.1-free.apk
-    🤳 Flip your phone to toggle Do Not Disturb automatically (Android)
-🆕 Version: 12.1.1-free
-
-Changelog: <a href='https://github.com/robinsrk/flip_2_dnd/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Fossify_Calculator_v1.4.0.apk
-    🧮 Open-source, privacy-friendly calculator by Fossify (Android)
-🆕 Version: 1.4.0
-
-Changelog: <a href='https://github.com/FossifyOrg/Calculator/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Fossify_Keyboard_v1.9.1.apk
-    ⌨️ Easy keyboard for inserting texts, special characters and numbers (Android)
-🆕 Version: 1.9.1
-
-Changelog: <a href='https://github.com/FossifyOrg/Keyboard/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Fossify_MusicPlayer_v1.8.5.apk
+📦 <b>File name</b> – Fossify_MusicPlayer_v1.8.6.apk
     🎶 Modern music player by Fossify (Android)
-🆕 Version: 1.8.5
+🚀 Version: 1.8.5 → 1.8.6
 
 Changelog: <a href='https://github.com/FossifyOrg/Music-Player/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – Fossify_Notes_v1.7.0.apk
-    🗒️ Secure, privacy-focused notes app (Android)
-🆕 Version: 1.7.0
-
-Changelog: <a href='https://github.com/FossifyOrg/Notes/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Fossify_VoiceRecorder_v1.7.4.apk
+📦 <b>File name</b> – Fossify_VoiceRecorder_v1.7.5.apk
     🎤 Simple, privacy-respecting voice recorder (Android)
-🆕 Version: 1.7.4
+🚀 Version: 1.7.4 → 1.7.5
 
 Changelog: <a href='https://github.com/FossifyOrg/Voice-Recorder/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – Gramophone_v1.1.2.apk
-    🎼 Minimalist, elegant music player (Android)
-🆕 Version: 1.1.2
-
-Changelog: <a href='https://github.com/FoedusProgramme/Gramophone/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – IceravenBrowser_viceraven-2.52.0.apk
+📦 <b>File name</b> – IceravenBrowser_viceraven-2.53.1.apk
     🦦 Privacy-focused web browser (Android)
-🆕 Version: iceraven-2.52.0
+🚀 Version: iceraven-2.52.0 → iceraven-2.53.1
 
 Changelog: <a href='https://github.com/fork-maintainers/iceraven-browser/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – LibreTube_v32.1.apk
-    🔒 Open-source YouTube app focusing on privacy (Android)
-🆕 Version: 32.1
-
-Changelog: <a href='https://github.com/libre-tube/LibreTube/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LocalSend_v1.18.2.apk
-    📤 Secure, local file sharing app (Android)
-🆕 Version: 1.18.2
-
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LocalSend_v1.18.2_LocalSend-1.18.2-windows-arm-64.zip
-    📤 Secure, local file sharing app (Windows)
-🆕 Version: 1.18.2
-
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LocalSend_v1.18.2_LocalSend-1.18.2-windows-x86-64.exe
-    📤 Secure, local file sharing app (Windows)
-🆕 Version: 1.18.2
-
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LocalSend_v1.18.2_LocalSend-CLI-1.18.2-windows-x86-64.exe
-    📤 Secure, local file sharing app (Windows)
-🆕 Version: 1.18.2
-
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LocalSend_v1.18.2_LocalSend-1.18.2-linux-arm-64.deb
-    📤 Secure, local file sharing app (Linux)
-🆕 Version: 1.18.2
-
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LocalSend_v1.18.2_LocalSend-1.18.2-linux-arm-64.tar.gz
-    📤 Secure, local file sharing app (Linux)
-🆕 Version: 1.18.2
-
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LocalSend_v1.18.2_LocalSend-1.18.2-linux-x86-64.AppImage
-    📤 Secure, local file sharing app (Linux)
-🆕 Version: 1.18.2
-
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LocalSend_v1.18.2_LocalSend-1.18.2-linux-x86-64.deb
-    📤 Secure, local file sharing app (Linux)
-🆕 Version: 1.18.2
-
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LocalSend_v1.18.2_LocalSend-1.18.2-linux-x86-64.tar.gz
-    📤 Secure, local file sharing app (Linux)
-🆕 Version: 1.18.2
-
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LocalSend_v1.18.2_LocalSend-CLI-1.18.2-linux-arm-64.tar.gz
-    📤 Secure, local file sharing app (Linux)
-🆕 Version: 1.18.2
-
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LocalSend_v1.18.2_LocalSend-CLI-1.18.2-linux-x86-64.tar.gz
-    📤 Secure, local file sharing app (Linux)
-🆕 Version: 1.18.2
-
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LocalSend_v1.18.2_LocalSend-1.18.2.dmg
-    📤 Secure, local file sharing app (macOS)
-🆕 Version: 1.18.2
-
-Changelog: <a href='https://github.com/localsend/localsend/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – LTECleanerFOSS_v5.1.0.apk
-    🧹 Clean up unnecessary files to free up space (Android)
-🆕 Version: 5.1.0
-
-Changelog: <a href='https://github.com/MDP43140/LTECleanerFOSS/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Magisk_v31.1.apk
-    🪄 Powerful systemless rooting solution (Android)
-🆕 Version: 31.1
-
-Changelog: <a href='https://github.com/topjohnwu/Magisk/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – MicroG_RE_v7.3.1.apk
+📦 <b>File name</b> – MicroG_RE_v7.3.2.apk
     🧩 MicroG RE - Enhanced Play Services compatibility (Android)
-🆕 Version: 7.3.1
+🚀 Version: 7.3.1 → 7.3.2
 
 Changelog: <a href='https://github.com/WSTxda/MicroG-RE/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – MoeList_v3.8.0.apk
-    📖 Anime and manga tracking app (Android)
-🆕 Version: 3.8.0
-
-Changelog: <a href='https://github.com/axiel7/MoeList/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Momogram_v13.1.1-0b74839817.apk
+📦 <b>File name</b> – Momogram_v13.2.2-4b55244698.apk
     📱 Telegram client with privacy and customization features (Android)
-🆕 Version: 13.1.1-0b74839817
+🚀 Version: 13.1.1-0b74839817 → 13.2.2-4b55244698
 
 Changelog: <a href='https://github.com/dic1911/Momogram/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – Nekogram_v13.2.2.apk
-    🐱 Feature-rich Telegram client with enhanced privacy (Android)
-🆕 Version: 13.2.2
-
-Changelog: <a href='https://github.com/Nekogram/Nekogram/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Omni_v1.3.apk
-    🛠️ All-in-one tool app with Compass, Spirit Level, Ruler and Flashlight (Android)
-🆕 Version: 1.3
-
-Changelog: <a href='https://github.com/FoedusProgramme/Omni/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – OuterTune_v0.10.1.apk
-    🎧 A Material 3 YouTube Music client &amp; local music player for Android (Android)
-🆕 Version: 0.10.1
-
-Changelog: <a href='https://github.com/OuterTune/OuterTune/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Pixelplay_v0.7.5-beta.apk
-    🎵 Lightweight music player with Material You design (Android)
-🆕 Version: 0.7.5-beta
-
-Changelog: <a href='https://github.com/theovilardo/PixelPlay/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – PhonographPlus_v2.0.2.apk
-    🎧 Enhanced music player fork (Android)
-🆕 Version: 2.0.2
-
-Changelog: <a href='https://github.com/chr56/Phonograph_Plus/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – PrismFileExplorer_v1.3.2.apk
-    🗂️ Powerful, material design file explorer (Android)
-🆕 Version: 1.3.2
-
-Changelog: <a href='https://github.com/Raival-e/Prism-File-Explorer/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Quantum_Download_Manager_v1.0.3_Quantum.Download.Manager_1.0.3_x64-setup.exe
-    📥 A modern, open-source download manager for Windows (Windows)
-🆕 Version: 1.0.3
-
-Changelog: <a href='https://github.com/PBhadoo/QDM/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Quantum_Download_Manager_v1.0.3_Quantum.Download.Manager_1.0.3_x64_en-US.msi
-    📥 A modern, open-source download manager for Windows (Windows)
-🆕 Version: 1.0.3
-
-Changelog: <a href='https://github.com/PBhadoo/QDM/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Quantum_Download_Manager_v1.0.3_Quantum.Download.Manager_1.0.3_amd64.AppImage
-    📥 A modern, open-source download manager for Windows (Linux)
-🆕 Version: 1.0.3
-
-Changelog: <a href='https://github.com/PBhadoo/QDM/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Quantum_Download_Manager_v1.0.3_Quantum.Download.Manager_1.0.3_amd64.deb
-    📥 A modern, open-source download manager for Windows (Linux)
-🆕 Version: 1.0.3
-
-Changelog: <a href='https://github.com/PBhadoo/QDM/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Quantum_Download_Manager_v1.0.3_Quantum.Download.Manager_1.0.3_aarch64.dmg
-    📥 A modern, open-source download manager for Windows (macOS)
-🆕 Version: 1.0.3
-
-Changelog: <a href='https://github.com/PBhadoo/QDM/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Shizuku_v13.6.0.r1086.2650830c.apk
-    🤖 Use system APIs directly with adb/root privileges from normal apps (Android)
-🆕 Version: 13.6.0.r1086.2650830c
-
-Changelog: <a href='https://github.com/RikkaApps/Shizuku/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – RetroMusicPlayer_v7.0.3.apk
-    🎵 Modern music player (Android)
-🆕 Version: 7.0.3
-
-Changelog: <a href='https://github.com/RetroMusicPlayer/RetroMusicPlayer/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Morphe_YouTube_v21.30.216.apk
-    🎬 YouTube with ad-block, background play, sponsor block and more (Android)
-🆕 Version: 21.30.216
-
-Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Morphe_YTMusic_v9.30.53.apk
-    🎵 YouTube Music with premium unlock, ad-block and advanced playback (Android)
-🆕 Version: 9.30.53
-
-Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – GooglePhotos_v7.92.0.977185651.apk
-    📷 Google Photos with premium/unlocked features (Android)
-🆕 Version: 7.92.0.977185651
-
-Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Twitter_v12.40.1-prod.01.apk
+📦 <b>File name</b> – Twitter_v12.41.0-prod.01.apk
     🐦 Twitter with Piko enhancements (Android)
-🆕 Version: 12.40.1-prod.01
+🚀 Version: 12.40.1-prod.01 → 12.41.0-prod.01
 
 Changelog: <a href='https://github.com/j-hc/revanced-magisk-module/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – Morphe_MicroG_v7.3.1.apk
+📦 <b>File name</b> – Morphe_MicroG_v7.3.2.apk
     🧩 MicroG for Morphe - enables Google sign-in (Android)
-🆕 Version: 7.3.1
+🚀 Version: 7.3.1 → 7.3.2
 
 Changelog: <a href='https://github.com/WSTxda/MicroG-RE/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – Morphe_Manager_v2.5.0.apk
+📦 <b>File name</b> – Morphe_Manager_v2.7.0.apk
     🛠️ Manage and install Morphe patches easily (Android)
-🆕 Version: 2.5.0
+🚀 Version: 2.5.0 → 2.7.0
 
 Changelog: <a href='https://github.com/MorpheApp/morphe-manager/releases/latest'>Open</a>
     ----
-📦 <b>File name</b> – Sdmaid_v2.2.2-rc0.apk
+📦 <b>File name</b> – Sdmaid_v2.2.3-rc0.apk
     🧹 Powerful system cleaning tool (Android)
-🆕 Version: 2.2.2-rc0
+🚀 Version: 2.2.2-rc0 → 2.2.3-rc0
 
 Changelog: <a href='https://github.com/d4rken-org/sdmaid-se/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – SimpMusic_v2.6.0.apk
-    🎵 Lightweight YT music player with Material You support (Android)
-🆕 Version: 2.6.0
-
-Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – SimpMusic_v2.6.0_SimpMusic-Windows-installer.zip
-    🎵 Lightweight YT music player with Material You support (Windows)
-🆕 Version: 2.6.0
-
-Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – SimpMusic_v2.6.0_SimpMusic-x86_64.AppImage
-    🎵 Lightweight YT music player with Material You support (Linux)
-🆕 Version: 2.6.0
-
-Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – SimpMusic_v2.6.0_SimpMusic-2.6.0-mac-aarch64.dmg
-    🎵 Lightweight YT music player with Material You support (macOS)
-🆕 Version: 2.6.0
-
-Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – SimpMusic_v2.6.0_SimpMusic-2.6.0-mac-amd64.dmg
-    🎵 Lightweight YT music player with Material You support (macOS)
-🆕 Version: 2.6.0
-
-Changelog: <a href='https://github.com/maxrave-dev/SimpMusic/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Symphony_v2024.12.115.apk
-    🎼 Lightweight music player for Android 9+ (Android)
-🆕 Version: 2024.12.115
-
-Changelog: <a href='https://github.com/zyrouge/symphony/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Termux_v0.118.3.apk
-    🖥️ Terminal emulator and Linux environment from Android (Android)
-🆕 Version: 0.118.3
-
-Changelog: <a href='https://github.com/termux/termux-app/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – ThunderbirdAndroid_v25.0.apk
-    📧 Official Thunderbird email client for Android (Android)
-🆕 Version: 25.0
-
-Changelog: <a href='https://github.com/thunderbird/thunderbird-android/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – VisualCodeSpace_v2.0.1.apk
-    💻 Lightweight, feature-rich Android code editor and IDE (Android)
-🆕 Version: 2.0.1
-
-Changelog: <a href='https://github.com/Visual-Code-Space/Visual-Code-Space/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – WeatherMaster_v3.11.0.apk
-    ☁️ Modern weather app with graphs (Android)
-🆕 Version: 3.11.0
-
-Changelog: <a href='https://github.com/PranshulGG/WeatherMaster/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – XedEditor_v3.4.5.apk
-    ✏️ Simple and fast text/code editor (Android)
-🆕 Version: 3.4.5
-
-Changelog: <a href='https://github.com/Xed-Editor/Xed-Editor/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Ytdlnis_v1.9.1.1.apk
-    ⬇️ YouTube downloader with advanced features (Android)
-🆕 Version: 1.9.1.1
-
-Changelog: <a href='https://github.com/deniscerri/ytdlnis/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Sonora_v3.1.apk
-    🎵 Privacy-friendly local music player for Android (Android)
-🆕 Version: 3.1
-
-Changelog: <a href='https://github.com/Darkstar085/Sonora/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Superiorwalls_v1.6.apk
-    🖼️ Modern Android wallpaper app (Android)
-🆕 Version: 1.6
-
-Changelog: <a href='https://github.com/Darkstar085/Superiorwalls/releases/latest'>Open</a>
-    ----
-📦 <b>File name</b> – Wallora_v2.0.apk
-    🌄 Curated wallpapers and collections for Android (Android)
-🆕 Version: 2.0
-
-Changelog: <a href='https://github.com/Darkstar085/Wallora/releases/latest'>Open</a>
     ----

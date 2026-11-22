@@ -57,9 +57,9 @@
   "Bitwarden": {
     "Android": {
       "assets": [
-        "Bitwarden_v2026.11.0.apk"
+        "Bitwarden_v2026.11.1.apk"
       ],
-      "version": "2026.11.0"
+      "version": "2026.11.1"
     }
   },
   "BreezyWeather": {
@@ -73,33 +73,33 @@
   "Cherrygram": {
     "Android": {
       "assets": [
-        "Cherrygram_v13.1.1.apk"
+        "Cherrygram_v13.2.2.apk"
       ],
-      "version": "13.1.1"
+      "version": "13.2.2"
     }
   },
   "ConverterNOW": {
     "Android": {
       "assets": [
-        "ConverterNOW_v4.7.0.apk"
+        "ConverterNOW_v4.7.1.apk"
       ],
-      "version": "4.7.0"
+      "version": "4.7.1"
     },
     "Linux": {
       "assets": [
-        "ConverterNOW_v4.7.0_converternow-aarch64.AppImage",
-        "ConverterNOW_v4.7.0_converternow-linux-aarch64.tar.gz",
-        "ConverterNOW_v4.7.0_converternow-linux-x86_64.tar.gz",
-        "ConverterNOW_v4.7.0_converternow-x86_64.AppImage"
+        "ConverterNOW_v4.7.1_converternow-aarch64.AppImage",
+        "ConverterNOW_v4.7.1_converternow-linux-aarch64.tar.gz",
+        "ConverterNOW_v4.7.1_converternow-linux-x86_64.tar.gz",
+        "ConverterNOW_v4.7.1_converternow-x86_64.AppImage"
       ],
-      "version": "4.7.0"
+      "version": "4.7.1"
     },
     "Windows": {
       "assets": [
-        "ConverterNOW_v4.7.0_converternow-windows-setup.exe",
-        "ConverterNOW_v4.7.0_converternow-windows.msix"
+        "ConverterNOW_v4.7.1_converternow-windows-setup.exe",
+        "ConverterNOW_v4.7.1_converternow-windows.msix"
       ],
-      "version": "4.7.0"
+      "version": "4.7.1"
     }
   },
   "CpuInfo": {
@@ -149,9 +149,9 @@
   "DuckDuckGo": {
     "Android": {
       "assets": [
-        "DuckDuckGo_v5.303.0.apk"
+        "DuckDuckGo_v5.304.0.apk"
       ],
-      "version": "5.303.0"
+      "version": "5.304.0"
     }
   },
   "Flip2DND": {
@@ -189,9 +189,9 @@
   "Fossify_MusicPlayer": {
     "Android": {
       "assets": [
-        "Fossify_MusicPlayer_v1.8.5.apk"
+        "Fossify_MusicPlayer_v1.8.6.apk"
       ],
-      "version": "1.8.5"
+      "version": "1.8.6"
     }
   },
   "Fossify_Notes": {
@@ -205,9 +205,9 @@
   "Fossify_VoiceRecorder": {
     "Android": {
       "assets": [
-        "Fossify_VoiceRecorder_v1.7.4.apk"
+        "Fossify_VoiceRecorder_v1.7.5.apk"
       ],
-      "version": "1.7.4"
+      "version": "1.7.5"
     }
   },
   "GooglePhotos": {
@@ -229,9 +229,9 @@
   "IceravenBrowser": {
     "Android": {
       "assets": [
-        "IceravenBrowser_viceraven-2.52.0.apk"
+        "IceravenBrowser_viceraven-2.53.1.apk"
       ],
-      "version": "iceraven-2.52.0"
+      "version": "iceraven-2.53.1"
     }
   },
   "Kudu": {
@@ -330,9 +330,9 @@
   "MicroG_RE": {
     "Android": {
       "assets": [
-        "MicroG_RE_v7.3.1.apk"
+        "MicroG_RE_v7.3.2.apk"
       ],
-      "version": "7.3.1"
+      "version": "7.3.2"
     }
   },
   "MoeList": {
@@ -346,39 +346,39 @@
   "Momogram": {
     "Android": {
       "assets": [
-        "Momogram_v13.1.1-0b74839817.apk"
+        "Momogram_v13.2.2-4b55244698.apk"
       ],
-      "version": "13.1.1-0b74839817"
+      "version": "13.2.2-4b55244698"
     }
   },
   "Mornye": {
     "Android": {
       "assets": [
-        "Mornye_v5.3.1-hotfix.2.apk"
+        "Mornye_v5.4.0.apk"
       ],
-      "version": "5.3.1-hotfix.2"
+      "version": "5.4.0"
     },
     "iOS": {
       "assets": [
-        "Mornye_v5.3.1_Mornye-v5.3.1-ios-unsigned.ipa"
+        "Mornye_v5.4.0_Mornye-v5.4.0-ios-unsigned.ipa"
       ],
-      "version": "5.3.1"
+      "version": "5.4.0"
     }
   },
   "Morphe_Manager": {
     "Android": {
       "assets": [
-        "Morphe_Manager_v2.5.0.apk"
+        "Morphe_Manager_v2.7.0.apk"
       ],
-      "version": "2.5.0"
+      "version": "2.7.0"
     }
   },
   "Morphe_MicroG": {
     "Android": {
       "assets": [
-        "Morphe_MicroG_v7.3.1.apk"
+        "Morphe_MicroG_v7.3.2.apk"
       ],
-      "version": "7.3.1"
+      "version": "7.3.2"
     }
   },
   "Morphe_YTMusic": {
@@ -502,9 +502,9 @@
   "Sdmaid": {
     "Android": {
       "assets": [
-        "Sdmaid_v2.2.2-rc0.apk"
+        "Sdmaid_v2.2.3-rc0.apk"
       ],
-      "version": "2.2.2-rc0"
+      "version": "2.2.3-rc0"
     }
   },
   "Shizuku": {
@@ -593,9 +593,9 @@
   "Twitter": {
     "Android": {
       "assets": [
-        "Twitter_v12.40.1-prod.01.apk"
+        "Twitter_v12.41.0-prod.01.apk"
       ],
-      "version": "12.40.1-prod.01"
+      "version": "12.41.0-prod.01"
     }
   },
   "VisualCodeSpace": {
